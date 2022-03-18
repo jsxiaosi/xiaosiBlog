@@ -19,7 +19,7 @@ const routes: Array<AppRouteRecordRaw> = [
   },
 ];
 // console.log(routes)
-const route = createRouter({
+export const route = createRouter({
   history: createWebHistory(''),
   routes: routes as unknown as RouteRecordRaw[],
 });
@@ -38,8 +38,8 @@ route.beforeEach((to, _from, next) => {
     }
   }
 
-  const userInfo = localStorage.getItem('userInfo');
-  if (userInfo) {
+  const openId = localStorage.getItem('openId');
+  if (openId) {
     if (to.path === '/login') next(_from.path);
     else next();
   } else {

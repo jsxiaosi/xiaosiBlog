@@ -73,14 +73,16 @@
   const onLogin = async (): Promise<void> => {
     const res = await deffHttp.post<any>(
       {
-        url: '/mock_api/login',
-        data: { username: user.value, password: pwd.value },
+        url: '/admin/login',
+        data: { userName: user.value, password: pwd.value },
       },
-      { isShowData: true, errorMessageMode: 'modal', withToken: false },
+      { errorMessageMode: 'modal' },
     );
     console.log(res);
-    if (res.code === 1) {
-      localStorage.setItem('userInfo', JSON.stringify(res.data));
+    // const { error, config, code, request, response } = res;
+    // console.log(error, config, code, request, response);
+    if (res) {
+      localStorage.setItem('openId', JSON.stringify(res.openId));
       router.push('/');
     }
   };

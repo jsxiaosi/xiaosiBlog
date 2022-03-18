@@ -85,6 +85,7 @@ export class iAxios {
    * @description get请求（config：axios请求配置, options：数据的特殊处理）
    */
   get<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+    console.log(config);
     return this.request({ ...config, method: 'GET' }, options);
   }
 
@@ -134,7 +135,6 @@ export class iAxios {
         .then((res: AxiosResponse<Result>) => {
           if (requestHook && isFunction(requestHook)) {
             try {
-              console.log(res);
               resolve(requestHook(res, opt));
             } catch (err) {
               reject(err || new Error('request error!'));

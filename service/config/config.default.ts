@@ -15,6 +15,17 @@ export default (appInfo: EggAppInfo) => {
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
   };
 
+  config.security = {
+    csrf: { enable: false },
+    domainWhiteList: [ '*' ],
+  };
+
+  config.cors = {
+    origin: 'http://127.0.0.1:3000',
+    credentials: true, // 允许Cook可以跨域
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+  };
+
   // 配置数据库
   config.mysql = {
     client: {

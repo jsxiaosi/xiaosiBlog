@@ -12,7 +12,7 @@
 <script lang="ts" setup>
   import { PropType } from 'vue';
   import TableChild from './src/components/TableChild.vue';
-  defineProps({
+  const props = defineProps({
     attribute: {
       type: Object as PropType<Recordable>,
       default: () => {},
@@ -22,4 +22,6 @@
       default: () => {},
     },
   });
+
+  console.log(props.attribute);
 </script>

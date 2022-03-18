@@ -1,6 +1,6 @@
 import { Controller } from 'egg';
 
-export default class HomeController extends Controller {
+export default class BlogController extends Controller {
   public async index() {
     const { ctx } = this;
     ctx.body = await ctx.service.test.sayHi('egg');
@@ -9,7 +9,7 @@ export default class HomeController extends Controller {
   // 首页文章列表接口
   public async getArticleList() {
 
-    const { ctx,app } = this;
+    const { ctx, app } = this;
 
     const sql = 'SELECT article.id as id,' +
               'article.title as title,' +

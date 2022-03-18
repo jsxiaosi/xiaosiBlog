@@ -8,7 +8,7 @@
     "declarations": true
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-xiaosi_blog_service",
+    "start": "egg-scripts start --daemon --title=egg-server-xiaosi_blog_service --ignore-stderr",
     "stop": "egg-scripts stop --title=egg-server-xiaosi_blog_service",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "egg": "^2.6.1",
+    "egg-cors": "^2.2.3",
     "egg-mysql": "^3.1.0",
     "egg-scripts": "^2.6.0"
   },

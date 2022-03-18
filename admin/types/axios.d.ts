@@ -15,6 +15,15 @@ export interface RequestOptions {
 }
 export interface Result<T = any> {
   code: number;
-  message: string;
+  errMsg: string;
   data: T;
+}
+
+type ConfigData = {
+  id?: number;
+  msg: boolean;
+};
+export interface DataType<T = ConfigData> {
+  data: T;
+  code: number;
 }

@@ -3,8 +3,10 @@ import { iAxios } from './iAxios';
 import { checkStatus } from './axiosStatus';
 import { isString } from 'lodash';
 import { useMessage } from '@/hooks/web/useMessage';
+import { route } from '@/router/index';
+import qs from 'qs';
 
-const { createErrorModal } = useMessage();
+const { createErrorModal, createErrorMsg } = useMessage();
 
 const interceptor: AxiosInterceptor = {
   /**
@@ -12,14 +14,21 @@ const interceptor: AxiosInterceptor = {
    */
   requestHook: (res, options) => {
     const { data } = res;
-
-    if (!data) return res;
+    const { isShowData, errorMessageMode } = options;
 
     if (data.code === -1) {
-      createErrorModal(data.message);
+      if (errorMessageMode === 'modal') {
+        console.log('进来这里了吗？');
+        createErrorModal(data.errMsg);
+      } else if (errorMessageMode === 'message') {
+        createErrorMsg(data.errMsg);
+      }
     }
 
-    if (options.isShowData) return data;
+    if (isShowData) {
+      if (!data.data) return null;
+      else return data.data;
+    }
 
     return res;
   },
@@ -39,6 +48,7 @@ const interceptor: AxiosInterceptor = {
     const { urlPrefix } = options;
     if (urlPrefix && isString(urlPrefix)) config.url = `${urlPrefix}${config.url}`;
     console.log(config);
+    if (config.method === 'GET') config.url = `${config.url}?${qs.stringify(config.data)}`;
     return config;
   },
 
@@ -76,8 +86,19 @@ const interceptor: AxiosInterceptor = {
   responseInterceptorsCatch: (error: any) => {
     const { response, message, config } = error || {};
     const errorMessageMode = config.requestOptions.errorMessageMode || 'none';
-    checkStatus(response.status, message, errorMessageMode);
-    return error;
+    let status;
+    if (response) {
+      if (response.status == 401) {
+        localStorage.removeItem('openId');
+        console.log(route);
+        route.push('/login');
+      }
+      status = response.status;
+    } else {
+      status = 400;
+    }
+    checkStatus(status, message, errorMessageMode);
+    return response;
   },
 };
 
@@ -90,10 +111,13 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
       // (拦截器)数据处理方式
       interceptor,
       headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
       // 配置项，下面的选项都可以在独立的接口请求中覆盖
       requestOptions: {
+        isShowData: true,
         withToken: true,
         errorMessageMode: 'message',
+        urlPrefix: 'http://127.0.0.1:7001/api',
       },
     },
     ...(opt || {}),

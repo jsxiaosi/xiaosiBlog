@@ -17,7 +17,7 @@ export function createViteServer(): ServerOptions {
     // 自定义代理规则
     proxy: {
       '/api': {
-        target: '',
+        target: 'http://127.0.0.1:7001',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
