@@ -1,0 +1,11 @@
+{
+  "name": "xiaosi_blog",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cd service && npm run dev & cd admin && npm run dev & cd blog && npm run dev"
+  },
+  "author": "",
+  "license": "ISC"
+}

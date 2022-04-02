@@ -19,6 +19,7 @@ export interface FormItemProps {
  * @param(component) 组件名称，ElInput，ElSelect
  * @param(label) 标签名
  * @param(prop) form表单双向绑定字段
+ * @param(fromItem) fromItem 属性
  * @param(props) 组件属性
  * @param(rules) 表单校验
  * @param(childrenComponent) 子组件属性 类似ElSelect、ElCheckboxGroup、ElRadioGroup等组件
@@ -27,6 +28,7 @@ export interface FormItemListProps {
   component: string;
   label: string;
   prop: string;
+  fromItem?: object;
   props?: object;
   rules?: object | Array<object>;
   childrenComponent?: {

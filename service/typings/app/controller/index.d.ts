@@ -5,7 +5,7 @@ import 'egg';
 import ExportHome from '../../../app/controller/home';
 import ExportAdminIndex from '../../../app/controller/admin/index';
 import ExportArticleHome from '../../../app/controller/article/home';
-import ExportBlogIndex from '../../../app/controller/blog/index';
+import ExportBriefArticleHome from '../../../app/controller/brief_article/home';
 import ExportTypeHome from '../../../app/controller/type/home';
 
 declare module 'egg' {
@@ -17,8 +17,8 @@ declare module 'egg' {
     article: {
       home: ExportArticleHome;
     }
-    blog: {
-      index: ExportBlogIndex;
+    briefArticle: {
+      home: ExportBriefArticleHome;
     }
     type: {
       home: ExportTypeHome;

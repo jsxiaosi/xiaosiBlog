@@ -24,10 +24,10 @@
           </FormItem>
         </el-col>
       </el-row>
-      <el-form-item>
+      <!-- <el-form-item>
         <el-button type="primary" @click="submitForm()">Create</el-button>
         <el-button @click="resetForm()">Reset</el-button>
-      </el-form-item>
+      </el-form-item> -->
     </el-form>
   </div>
 </template>

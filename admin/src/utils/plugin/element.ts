@@ -34,9 +34,11 @@ import {
   ElTable,
   ElTableColumn,
   ElDialog,
+  ElPagination,
   // 指令
   ElLoading,
   ElInfiniteScroll,
+  ElSwitch,
 } from 'element-plus';
 
 // Directives
@@ -77,6 +79,8 @@ const components = [
   ElTable,
   ElTableColumn,
   ElDialog,
+  ElSwitch,
+  ElPagination,
 ];
 
 // https://element-plus.org/zh-CN/component/icon.html

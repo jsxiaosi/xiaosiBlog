@@ -31,44 +31,55 @@
       <el-col :span="6" class="right">
         <el-card shadow="always">
           <div class="push">
-            <el-button>暂存文章</el-button>
-            <el-button type="primary" @click="addArticle()">发布文章</el-button>
+            <el-button @click="briefArticle()">暂存文章</el-button>
+            <el-button type="primary" @click="handleArticle()">发布文章</el-button>
           </div>
           <div class="introduction">
-            <el-input
+            <img :src="fileData" />
+            <!-- <el-input
               v-model="blogData.info.introduce"
               class="input"
               type="textarea"
               placeholder="文章介绍"
-            ></el-input>
+            ></el-input> -->
           </div>
         </el-card>
       </el-col>
     </el-row>
-
-    <!--  -->
   </div>
 </template>
 <script lang="ts" setup>
   import { computed, onMounted, reactive, ref } from 'vue';
   import { marked } from 'marked';
+  import hljs from 'highlight.js';
+  import 'highlight.js/styles/monokai-sublime.css';
   import { typeListApi } from '@/api/typeInfo';
-  import { addArticleApi, articleInfoApi, updateArticleApi } from '@/api/blog';
+  import { addArticleApi, articleInfoApi, updateArticleApi, uploadApi } from '@/api/blog';
+  import {
+    briefArticleInfoApi,
+    addbriefArticleApi,
+    updatebriefArticleApi,
+    delbriefArticleApi,
+  } from '@/api/briefArticle';
   import { useMessage } from '@/hooks/web/useMessage';
   import { useRoute, useRouter } from 'vue-router';
   import { BlogModel } from '@/api/blog/blogModel';
   import { TypeInfoModel } from '@/api/typeInfo/typeInfoModel';
+
   const route = useRoute();
   const router = useRouter();
 
-  console.log(route.query.id);
   const articleId = route.query.id;
+  const pageType = route.query.type;
 
   const { createErrorMsg } = useMessage();
 
   onMounted(async () => {
     if (articleId) {
-      const res = await articleInfoApi({ id: Number(articleId) });
+      const res =
+        pageType === 'brief'
+          ? await briefArticleInfoApi({ id: Number(articleId) })
+          : await articleInfoApi({ id: Number(articleId) });
       if (res) blogData.info = res;
     }
   });
@@ -81,6 +92,9 @@
     breaks: true,
     smartLists: true,
     smartypants: false,
+    highlight: function (code) {
+      return hljs.highlightAuto(code).value;
+    },
   });
 
   const html = computed(() => marked(blogData.info.article_content as string));
@@ -96,14 +110,15 @@
 
   const blogData = reactive<{ info: BlogModel }>({
     info: {
-      type_id: 0,
-      title: '',
+      // type_id: 0,
+      // title: '',
       article_content: '# Marked in Node.js\n\nRendered by **marked**.',
-      introduce: '',
+      // introduce: '',
     },
   });
 
-  const addArticle = async () => {
+  // 发布文章按钮事件
+  const handleArticle = async () => {
     const { info } = blogData;
     if (!info.title) {
       createErrorMsg('文章标题不可为空');
@@ -112,15 +127,77 @@
     } else if (!info.article_content) {
       createErrorMsg('文章内容不可为空');
     } else {
-      const res = articleId ? await updateArticleApi(info) : await addArticleApi(info);
-      console.log(res);
-      if (res) {
-        router.back();
+      let optType = 'add';
+      if (pageType === 'brief') {
+        if (info.article_id) {
+          info.id = info.article_id;
+          optType = 'update';
+        } else delete info.id;
+        delete info.article_id;
+      } else {
+        if (articleId) optType = 'update';
       }
+      addArticle(optType, info);
     }
-    // blogData.addTime = new Date(blogData.addTime).getTime() / 1000;
-    // blogData.endTime = new Date(blogData.endTime).getTime() / 1000;
   };
+
+  // 文章添加修改
+  const addArticle = async (type: string, info: BlogModel) => {
+    const res = type === 'update' ? await updateArticleApi(info) : await addArticleApi(info);
+    if (res) {
+      if (pageType === 'brief') {
+        const dlres = await delbriefArticleApi({ id: Number(articleId) });
+        if (dlres) router.back();
+      } else router.back();
+    }
+  };
+
+  // 暂存文章添加与修改
+  const briefArticle = async () => {
+    let dataInfo: BlogModel = blogData.info;
+    if (pageType !== 'brief' && dataInfo.id) {
+      dataInfo.article_id = dataInfo.id;
+      delete dataInfo.id;
+      delete dataInfo.view_count;
+      delete dataInfo.isTop;
+      delete dataInfo.addTime;
+    }
+    const res =
+      articleId && pageType === 'brief'
+        ? await updatebriefArticleApi(dataInfo)
+        : await addbriefArticleApi(dataInfo);
+    if (res) {
+      router.back();
+    }
+  };
+
+  const fileData = ref();
+
+  const upload = async (file: any) => {
+    const forData = new FormData();
+    forData.append('file', file);
+    forData.append('id', new Date().getTime() + '');
+    const res = await uploadApi(forData);
+    console.log(res);
+  };
+
+  onMounted(() => {
+    document.addEventListener('paste', async (event) => {
+      let items = event.clipboardData && event.clipboardData.items;
+      let file: File = {} as File;
+      if (items && items.length) {
+        // 检索剪切板items
+        for (var i = 0; i < items.length; i++) {
+          console.log(items[i].getAsFile());
+
+          if (items[i].type.indexOf('image') !== -1) {
+            file = items[i].getAsFile() as File;
+            upload(file);
+          }
+        }
+      }
+    });
+  });
 </script>
 
 <style lang="scss" scoped>
@@ -161,23 +238,18 @@
               width: 49%;
               height: 100%;
               padding: 0 20px;
+              overflow-y: auto;
               border: 1px solid #{$text-color-placeholder};
             }
           }
         }
       }
       .right {
+        display: flex;
+        flex-direction: column;
         height: 100%;
         .el-card {
           height: 100%;
-          .push,
-          .introduction,
-          .date {
-            margin-bottom: 20px;
-          }
-          .date {
-            display: flex;
-          }
         }
       }
     }

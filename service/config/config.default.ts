@@ -16,20 +16,31 @@ export default (appInfo: EggAppInfo) => {
   };
 
   config.security = {
-    csrf: { enable: false },
-    domainWhiteList: [ '*' ],
+    csrf: { 
+      // enable: true ,
+      headerName: 'x-csrf-token'
+    },
+    domainWhiteList: ['*'],
   };
 
+  config.session =  {
+    key: 'TOKEN',
+    maxAge: 2 * 3600 * 1000, // 2 小时
+    httpOnly: true,
+    encrypt: false,
+    renew: true,
+    sameSite: 'none',
+    secure:false
+  },
+
   config.cors = {
-    origin: 'http://127.0.0.1:3000',
     credentials: true, // 允许Cook可以跨域
-    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
   };
 
   // 配置数据库
   config.mysql = {
     client: {
-    // host
+      // host
       host: 'localhost',
       // 端口号
       port: '3306',
@@ -38,7 +49,7 @@ export default (appInfo: EggAppInfo) => {
       // 密码
       password: '123456',
       // 数据库名
-      database: 'react_blog',
+      database: 'xiaosiblog',
     },
     // 是否加载到 app 上，默认开启
     app: true,

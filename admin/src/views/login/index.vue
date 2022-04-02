@@ -57,7 +57,7 @@
   import SvgIcon from '@/components/SvgIcon/index.vue';
   import { AppLocale, AppTheme } from '@/components/Application';
   import { useRouter } from 'vue-router';
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import { addClass, removeClass } from '@/utils/operate';
   import { deffHttp } from '@/utils/axios';
 
@@ -69,6 +69,23 @@
 
   let user = ref('');
   let pwd = ref('');
+
+  onMounted(() => {
+    getToken();
+  });
+
+  const getToken = async () => {
+    const res = await deffHttp.get<any>(
+      {
+        url: '/admin/getToken',
+      },
+      { errorMessageMode: 'modal' },
+    );
+    console.log(res);
+    if (res) {
+      sessionStorage.setItem('token', res.token);
+    }
+  };
 
   const onLogin = async (): Promise<void> => {
     const res = await deffHttp.post<any>(

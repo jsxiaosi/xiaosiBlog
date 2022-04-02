@@ -128,6 +128,7 @@ export class iAxios {
     }
 
     conf.requestOptions = opt;
+    console.log(conf);
 
     return new Promise((resolve, reject) => {
       this.axiosInstance

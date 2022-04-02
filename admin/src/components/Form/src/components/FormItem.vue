@@ -54,14 +54,14 @@
 
       return () => {
         const { formItem } = props;
-        const { prop, render, rules, label } = formItem;
+        const { prop, render, rules, label, fromItem } = formItem;
         const values = { formModel: formModel, formItem: formItem };
         const solfn = getSlot(slots, prop, values);
         const getContent = () => {
           return solfn ? solfn : render ? render(values) : renderComponent();
         };
         return (
-          <el-form-item label={label} prop={prop} rules={rules}>
+          <el-form-item label={label} prop={prop} rules={rules} {...fromItem}>
             {getContent()}
           </el-form-item>
         );

@@ -1,0 +1,114 @@
+@import "./winodw.scss";
+@import "./def.scss";
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #{$--sub-color};
+}
+
+div{
+  box-sizing: border-box;
+}
+
+a{
+  text-decoration:none;
+  color: #000000;
+}
+
+.main {
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  box-sizing: border-box;
+  // padding: 20px;
+  .main_title {
+    width: 100%;
+    height: #{$--top-bar-height};
+    background-color: #{$--main-color};
+    border-bottom: 1px solid #{$--shadow-color};
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+  .main_content {
+    width: #{$--main-width};
+    margin: #{$--top-bar-height} auto 0;
+    padding-top: 25px;
+    .page {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      .left-box {
+        position: sticky;
+        height: calc(100vh - #{$--top-bar-height} - 25px);
+        top: 80px;
+        left: 0;
+        flex: 0 0 288px;
+        scrollbar-width: none; /* firefox */
+        -ms-overflow-style: none; /* IE 10+ */
+        overflow-y: auto;
+      }
+      .left-box::-webkit-scrollbar {
+        display: none; /* Chrome Safari */
+      }
+      .rigth-box {
+        position: relative;
+        width: 200px;
+        flex: 1 1;
+        margin-left: 72px;
+      }
+    }
+  }
+}
+
+.flex-x{
+  display: flex;
+  flex-direction: row;
+}
+.flex-y-center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pointer{
+  cursor:pointer
+}
+
+.container {
+  width: 100%;
+  border-bottom: 1px solid #{$--border-color};
+  padding: 25px 0;
+  .title {
+    font-size: 14px;
+    color: #666666;
+  }
+  ul {
+    margin-top: 15px;
+    margin-bottom: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      font-size: 14px;
+      margin: 5px 0;
+      .icon {
+        margin-right: 10px;
+        color: #666666;
+      }
+    }
+  }
+}
+
+.cart {
+  width: 100%;
+  border: 1px solid #{$--border-color};
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+  padding: 30px;
+  border: 1px solid #{$--border-color};
+  margin-bottom: 30px;
+  background-color: #{$--main-color};
+}

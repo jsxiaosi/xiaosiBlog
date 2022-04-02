@@ -4,7 +4,7 @@ const route = {
     blog: 'blog',
     blog_addArticle: 'AddArticle',
     blog_blogTable: 'Article List',
-    blog_storageArticle: 'Temporary storage List',
+    blog_briefArticle: 'Brief Article List',
     type: 'Type',
     typeList: 'Type List',
   },

@@ -23,12 +23,13 @@ export default class TypeController extends Controller {
 
   // 删除分类
   public async deleteType() {
-    const id = this.ctx.request.body.id;
-    const res = await this.app.mysql.delete('type', { id });
+    const { ctx, app } = this;
+    const id = ctx.request.body.id;
+    const res = await app.mysql.delete('type', { id });
     if (res.affectedRows) {
-      this.ctx.body = { data: { msg: '删除成功' }, code: 1 };
+      ctx.body = { data: { msg: '删除成功' }, code: 1 };
     } else {
-      this.ctx.body = { errMsg: '删除失败，id不正确', code: -1 };
+      ctx.body = { errMsg: '删除失败，id不正确', code: -1 };
     }
   }
 }

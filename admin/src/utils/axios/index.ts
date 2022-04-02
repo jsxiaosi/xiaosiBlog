@@ -5,6 +5,7 @@ import { isString } from 'lodash';
 import { useMessage } from '@/hooks/web/useMessage';
 import { route } from '@/router/index';
 import qs from 'qs';
+import Cookies from 'js-cookie';
 
 const { createErrorModal, createErrorMsg } = useMessage();
 
@@ -56,11 +57,13 @@ const interceptor: AxiosInterceptor = {
    * @description: 请求拦截器处理
    */
   requestInterceptors: (config) => {
+    console.log('asdasdasdasd', Cookies.get('csrfToken'));
     const { requestOptions } = config;
     if (requestOptions?.withToken) {
-      (config as Recordable).headers._token = 'myToken';
-      if (requestOptions?.specialToken)
-        (config as Recordable).headers._token = requestOptions?.specialToken;
+      const token = Cookies.get('csrfToken');
+      if (token) (config as Recordable).headers['x-csrf-token'] = token;
+      // if (requestOptions?.specialToken)
+      //   (config as Recordable).headers._token = requestOptions?.specialToken;
     }
 
     return config;
@@ -85,6 +88,7 @@ const interceptor: AxiosInterceptor = {
    */
   responseInterceptorsCatch: (error: any) => {
     const { response, message, config } = error || {};
+    console.log(config);
     const errorMessageMode = config.requestOptions.errorMessageMode || 'none';
     let status;
     if (response) {
