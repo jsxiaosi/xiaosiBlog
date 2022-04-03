@@ -1,6 +1,8 @@
+import { compress } from 'image-conversion';
+
 // 文件流转化为base64
 export function fileToBase64(file: File) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
@@ -10,7 +12,7 @@ export function fileToBase64(file: File) {
 }
 // 文件流转化为二进制字符串
 export function fileToBinaryString(file: File) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve) {
     const reader = new FileReader();
     reader.readAsBinaryString(file);
     reader.onload = function () {
@@ -55,5 +57,16 @@ export function base64toFile(dataurl: string, filename: String = 'file') {
   }
   return new File([u8arr], `${filename}.${suffix}`, {
     type: mime,
+  });
+}
+
+//压缩图片
+export function beforeAvatarUpload(file: File): Promise<Blob> {
+  return new Promise((resolve) => {
+    // 压缩到100KB,这里的100就是要压缩的大小,可自定义
+    compress(file, 0.4).then((res) => {
+      console.log(res);
+      resolve(res);
+    });
   });
 }

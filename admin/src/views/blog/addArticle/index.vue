@@ -65,6 +65,7 @@
   import { useRoute, useRouter } from 'vue-router';
   import { BlogModel } from '@/api/blog/blogModel';
   import { TypeInfoModel } from '@/api/typeInfo/typeInfoModel';
+  import { beforeAvatarUpload } from '@/utils/file';
 
   const route = useRoute();
   const router = useRouter();
@@ -173,9 +174,14 @@
 
   const fileData = ref();
 
-  const upload = async (file: any) => {
+  const upload = async (file: File) => {
+    const fileData = new File([await beforeAvatarUpload(file)], file.name, {
+      type: file.type,
+      lastModified: Date.now(),
+    });
+    console.log(fileData);
     const forData = new FormData();
-    forData.append('file', file);
+    forData.append('file', fileData);
     forData.append('id', new Date().getTime() + '');
     const res = await uploadApi(forData);
     console.log(res);
