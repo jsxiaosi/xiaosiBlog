@@ -1,8 +1,67 @@
+<script setup lang="ts">
+interface AccountType {
+  name: string
+  autograph: string
+  qq: string
+  email: string
+  github: string
+  githubName: string
+  location: string
+}
+
+const route = useRoute()
+const config = useRuntimeConfig()
+
+let id = 0
+if (!isNaN(Number(route.params.id)))
+  id = Number(route.params.id)
+
+const reslist = ref([])
+const typeList = ref([])
+const account = ref<AccountType>({
+  name: '',
+  autograph: '',
+  qq: '',
+  email: '',
+  github: '',
+  githubName: '',
+  location: '',
+})
+
+const getBlogList = async() => {
+  const { data } = await useFetch<{
+    topList: any[]
+    type: any[]
+    list: any[]
+  }>(`${config.baseURL}/api/blog/article_list`, { params: { id } })
+  if (data.value) {
+    const { topList, type, list } = data.value
+    reslist.value = [...topList, ...list]
+    typeList.value = type
+  }
+}
+
+getBlogList()
+
+const getUserInfo = async() => {
+  const { data } = await useFetch<{
+    userInfo: AccountType
+  }>(`${config.baseURL}/api/blog/userInfo`, { params: { id: '1' } })
+  if (data.value) {
+    const { userInfo } = data.value
+    account.value = userInfo
+  }
+}
+
+getUserInfo()
+
+</script>
+
 <template>
   <div class="page">
     <div class="left-box">
       <div class="container flex-y-center" style="padding-top:0">
-        <img class="image" src="@/assets/image/logo.png" />
+        <img class="image" src="@/assets/image/logo.png">
         <span class="name">{{ account.name }}</span>
         <span class="position">{{ account.autograph }}</span>
       </div>
@@ -21,9 +80,9 @@
       <div class="container">
         <span class="title">文章分类：</span>
         <ul>
-          <li class="pointer" v-for="item in typeList" :key="item.id">
+          <li v-for="item in typeList" :key="item.id" class="pointer">
             <NuxtLink :to="`/${item.id}`">
-              <i class="iconfont icon-wenjianjia icon"></i>
+              <i class="iconfont icon-wenjianjia icon" />
               <span>{{ item.typeName }}（{{ item.orderNum }}）</span>
             </NuxtLink>
           </li>
@@ -31,12 +90,16 @@
       </div>
     </div>
     <div class="rigth-box">
-      <div class="cart" v-for="item in reslist" :key="item.id">
+      <div v-for="item in reslist" :key="item.id" class="cart">
         <NuxtLink :to="`/article_info/${item.id}`">
-          <h3 class="pointer">{{ item.title }}</h3>
+          <h3 class="pointer">
+            {{ item.title }}
+          </h3>
         </NuxtLink>
-        <hr />
-        <div class="introduce">{{ item.introduce }}</div>
+        <hr>
+        <div class="introduce">
+          {{ item.introduce }}
+        </div>
         <div class="info flex-x">
           <span>{{ item.addTime }}</span>
           <span>分类：{{ item.typeName }}</span>
@@ -47,71 +110,12 @@
   </div>
 </template>
 
-<script setup lang="ts">
-type AccountType = {
-  name: string,
-  autograph: string,
-  qq: string,
-  email: string,
-  github: string,
-  githubName: string,
-  location: string
-}
-
-const route = useRoute()
-const config = useRuntimeConfig()
-
-let id = 0;
-if (!isNaN(Number(route.params.id))) id = Number(route.params.id)
-
-const reslist = ref([])
-const typeList = ref([])
-const account = ref<AccountType>({
-  name: '',
-  autograph: '',
-  qq: '',
-  email: '',
-  github: '',
-  githubName: '',
-  location: ''
-})
-
-const getBlogList = async () => {
-  const { data } = await useFetch<{
-    topList: any[],
-    type: any[],
-    list: any[]
-  }>(`${config.baseURL}/api/blog/article_list`, { params: { id } })
-  if (data.value) {
-    const { topList, type, list } = data.value
-    reslist.value = [...topList, ...list]
-    typeList.value = type
-  }
-}
-
-getBlogList()
-
-const getUserInfo = async () => {
-  const { data } = await useFetch<{
-    userInfo: AccountType,
-  }>(`${config.baseURL}/api/blog/userInfo`, { params: { id: '1' } })
-  if (data.value) {
-    const { userInfo } = data.value
-    account.value = userInfo
-  }
-}
-
-
-getUserInfo()
-
-</script>
-
 <style lang="scss" scoped>
 .container {
   .image {
     width: 100px;
     height: 100px;
-    background-color: #{$--main-color};
+    background-color: #{$--day-main-color};
     border-radius: 50%;
     // height: 100vw;
   }

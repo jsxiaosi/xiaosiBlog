@@ -1,3 +1,16 @@
+<script setup lang="ts">
+const color = useColorMode()
+function toggleDark() {
+  color.value = color.value === 'dark' ? 'light' : 'dark'
+}
+</script>
+
+<!-- <script>
+export default {
+  layout: "custom",
+}
+</script> -->
+
 <template>
   <div class="main">
     <div class="main_title">
@@ -5,6 +18,9 @@
         <NuxtLink :to="`/`">
           <h2>xiaosi blog</h2>
         </NuxtLink>
+        <!-- <button class="!outline-none" @click="toggleDark()">
+          切换主题
+        </button> -->
       </div>
     </div>
     <div class="main_content">
@@ -13,16 +29,10 @@
   </div>
 </template>
 
-<script>
-export default {
-  layout: "custom",
-}
-</script>
-
 <style lang="scss" scoped>
-@import "@/assets/style/winodw.scss";
+// @import "@/assets/style/winodw.scss";
 .head {
-  width: #{$--main-width};
+  width: #{$--day-main-width};
   height: 100%;
   margin: auto;
   display: flex;

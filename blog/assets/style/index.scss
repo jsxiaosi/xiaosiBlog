@@ -1,10 +1,16 @@
-@import "./winodw.scss";
+@import "./variables-day.scss";
 @import "./def.scss";
+
+.dark {
+  body {
+    background-color: #222;
+  }
+}
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #{$--sub-color};
+  background-color: #{$--day-sub-color};
 }
 
 div{
@@ -24,17 +30,17 @@ a{
   // padding: 20px;
   .main_title {
     width: 100%;
-    height: #{$--top-bar-height};
-    background-color: #{$--main-color};
-    border-bottom: 1px solid #{$--shadow-color};
+    height: #{$--day-top-bar-height};
+    background-color: #{$--day-main-color};
+    border-bottom: 1px solid #{$--day-shadow-color};
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1;
   }
   .main_content {
-    width: #{$--main-width};
-    margin: #{$--top-bar-height} auto 0;
+    width: #{$--day-main-width};
+    margin: #{$--day-top-bar-height} auto 0;
     padding-top: 25px;
     .page {
       width: 100%;
@@ -42,7 +48,7 @@ a{
       justify-content: space-between;
       .left-box {
         position: sticky;
-        height: calc(100vh - #{$--top-bar-height} - 25px);
+        height: calc(100vh - #{$--day-top-bar-height} - 25px);
         top: 80px;
         left: 0;
         flex: 0 0 288px;
@@ -79,7 +85,7 @@ a{
 
 .container {
   width: 100%;
-  border-bottom: 1px solid #{$--border-color};
+  border-bottom: 1px solid #{$--day-border-color};
   padding: 25px 0;
   .title {
     font-size: 14px;
@@ -104,11 +110,11 @@ a{
 
 .cart {
   width: 100%;
-  border: 1px solid #{$--border-color};
+  border: 1px solid #{$--day-border-color};
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
   padding: 30px;
-  border: 1px solid #{$--border-color};
+  border: 1px solid #{$--day-border-color};
   margin-bottom: 30px;
-  background-color: #{$--main-color};
+  background-color: #{$--day-main-color};
 }
