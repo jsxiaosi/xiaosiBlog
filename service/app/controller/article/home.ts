@@ -43,7 +43,7 @@ export default class ArticleController extends Controller {
   // 客户端得到详细页文章接口
   public async blogGetArticleInfo() {
     const { ctx, app } = this;
-    console.log(ctx.query)
+    console.log(ctx.query);
     const id = ctx.query.id;
     if (id) {
       const sql1 = 'UPDATE article SET view_count = (view_Count+1) WHERE id =' + id;
@@ -57,7 +57,7 @@ export default class ArticleController extends Controller {
                       FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime,
                       article.view_count as view_count,
                       type.typeName as typeName
-                      FROM article LEFT JOIN type ON article.type_id = type.id WHERE article.id = ${id}`
+                      FROM article LEFT JOIN type ON article.type_id = type.id WHERE article.id = ${id}`;
         const result = await app.mysql.query(sql2) as EggMySQLUpdateResult;
         // const result = await app.mysql.select('article', {
         //   where: { id },
@@ -75,10 +75,10 @@ export default class ArticleController extends Controller {
   // 获得文章列表
   public async getArticleList() {
     const { ctx, app } = this;
-    const { count, pageSize } = ctx.request.body
-    const firstIndex = (count - 1) * pageSize
-    const lastIndex = count * pageSize
-    console.log(firstIndex, lastIndex)
+    const { count, pageSize } = ctx.request.body;
+    const firstIndex = (count - 1) * pageSize;
+    const lastIndex = count * pageSize;
+    console.log(firstIndex, lastIndex);
     // 查询列表
     const sql = `SELECT article.id as id,
                  article.title as title,
@@ -90,12 +90,12 @@ export default class ArticleController extends Controller {
                  FROM article LEFT JOIN type ON article.type_id = type.Id
                  ORDER BY article.id DESC LIMIT ${firstIndex},${lastIndex}`;
     // 查询分页
-    const sql2 = `SELECT COUNT(*) as tooles FROM article`
+    const sql2 = 'SELECT COUNT(*) as tooles FROM article';
 
     const resList = await app.mysql.query(sql);
     const total = await app.mysql.query(sql2);
 
-    console.log(total[0].tooles)
+    console.log(total[0].tooles);
 
     ctx.body = { data: { list: resList, total: total[0].tooles }, code: 1 };
   }
@@ -187,8 +187,15 @@ export default class ArticleController extends Controller {
   public async delArticle() {
     const { ctx, app } = this;
     const id = ctx.request.body.id;
+    const typeIdSql = `SELECT article.type_id FROM article WHERE article.id = ${id}`;
+    const getTypeId = await app.mysql.query(typeIdSql);
     const res = await app.mysql.delete('article', { id });
     if (res.affectedRows) {
+      if (getTypeId[0]) {
+        const sql = 'UPDATE type SET orderNum = (orderNum-1) WHERE id =' + getTypeId[0].type_id;
+        await app.mysql.query(sql) as EggMySQLUpdateResult;
+      }
+
       ctx.body = { data: { msg: '删除成功' }, code: 1 };
     } else {
       ctx.body = { errMsg: '删除失败，id不正确', code: -1 };
