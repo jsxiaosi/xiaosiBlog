@@ -127,7 +127,7 @@ const back = () => {
         </ul>
       </div>
     </div>
-    <div class="rigth-box cart" v-html="html" />
+    <div class="rigth-box cart markdown" v-html="html" />
   </div>
 </template>
 

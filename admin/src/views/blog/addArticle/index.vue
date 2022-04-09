@@ -12,8 +12,7 @@
                 :key="item.id"
                 :label="item.typeName"
                 :value="item.id"
-              >
-              </el-option>
+              ></el-option>
             </el-select>
           </div>
         </el-card>
@@ -24,7 +23,7 @@
               class="input"
               type="textarea"
             ></el-input>
-            <div class="marked" :innerHTML="html"> </div>
+            <div class="marked" :innerHTML="html"></div>
           </div>
         </el-card>
       </el-col>
@@ -66,6 +65,7 @@
   import { BlogModel } from '@/api/blog/blogModel';
   import { TypeInfoModel } from '@/api/typeInfo/typeInfoModel';
   import { beforeAvatarUpload } from '@/utils/file';
+  import { httpsUrl } from '@/utils/axios';
 
   const route = useRoute();
   const router = useRouter();
@@ -180,16 +180,25 @@
   const fileData = ref();
 
   const upload = async (file: File) => {
-    const fileData = new File([await beforeAvatarUpload(file)], file.name, {
-      type: file.type,
+    const { info } = blogData;
+
+    console.log(file);
+    const fileType = file.type.split('/')[1];
+    let newFile = new File([file], `${info.title || ''}${new Date().getTime()}.${fileType}`, file);
+    const url = encodeURI(`${httpsUrl}/image/${newFile.name}.${fileType}`);
+    console.log(`<img src="${url}}" style="width:100%">`);
+    const fileData = new File([await beforeAvatarUpload(newFile)], newFile.name, {
+      type: newFile.type,
       lastModified: Date.now(),
     });
-    console.log(fileData);
     const forData = new FormData();
     forData.append('file', fileData);
     forData.append('id', new Date().getTime() + '');
     const res = await uploadApi(forData);
     console.log(res);
+    if (res) {
+      blogData.info.article_content += `\n <img src="${url}}" style="width:100%">`;
+    }
   };
 
   onMounted(() => {
@@ -199,8 +208,6 @@
       if (items && items.length) {
         // 检索剪切板items
         for (var i = 0; i < items.length; i++) {
-          console.log(items[i].getAsFile());
-
           if (items[i].type.indexOf('image') !== -1) {
             file = items[i].getAsFile() as File;
             upload(file);

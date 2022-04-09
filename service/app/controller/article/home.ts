@@ -135,7 +135,12 @@ export default class ArticleController extends Controller {
     const { ctx } = this;
     const data = await ctx.service.upload.index();
     if (data) {
-      ctx.body = data;
+      ctx.body = {
+        data: {
+          fileName: data,
+        },
+        code: 1,
+      };
     } else {
       ctx.body = {
         message: '上传失败',

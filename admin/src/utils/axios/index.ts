@@ -9,6 +9,8 @@ import Cookies from 'js-cookie';
 
 const { createErrorModal, createErrorMsg } = useMessage();
 
+export const httpsUrl = 'http://127.0.0.1:7001';
+
 const interceptor: AxiosInterceptor = {
   /**
    * @description: 处理请求数据。如果数据不是预期格式，可直接抛出错误
@@ -121,7 +123,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
         isShowData: true,
         withToken: true,
         errorMessageMode: 'message',
-        urlPrefix: 'http://127.0.0.1:7001/api',
+        urlPrefix: `${httpsUrl}/api`,
       },
     },
     ...(opt || {}),
