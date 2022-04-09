@@ -85,15 +85,20 @@
     }
   });
 
+  const renderer = new marked.Renderer();
+  renderer.heading = function (text, level) {
+    return `<a class="anchor-fix"><h${level}>${text}</h${level}></a>\n`;
+  };
+
   marked.setOptions({
-    renderer: new marked.Renderer(),
+    renderer,
     gfm: true,
     pedantic: false,
     sanitize: false,
     breaks: true,
     smartLists: true,
     smartypants: false,
-    highlight: function (code) {
+    highlight(code) {
       return hljs.highlightAuto(code).value;
     },
   });
@@ -243,7 +248,6 @@
             .marked {
               width: 49%;
               height: 100%;
-              padding: 0 20px;
               overflow-y: auto;
               border: 1px solid #{$text-color-placeholder};
             }
@@ -256,6 +260,9 @@
         height: 100%;
         .el-card {
           height: 100%;
+        }
+        .introduction {
+          margin-top: 20px;
         }
       }
     }

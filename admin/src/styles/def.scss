@@ -31,3 +31,23 @@ code {
 iframe{
   height: 34rem;
 }
+
+// 设置描点边距
+.anchor-fix{
+  display: block;
+  margin-top: -54px;
+  padding-top: 54px;
+  h2{
+    // margin: 0;
+    border-left: 3px solid #ccc;
+    background-color: #eaeaea;
+    padding: 10px;
+    color: #444;
+  }
+  h3{
+    border-bottom: 1px dashed #ccc;
+    padding: 10px;
+    color: #444;
+  }
+  // border-bottom: 1px solid #f3f3f3;
+}
