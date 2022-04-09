@@ -36,12 +36,12 @@
           </div>
           <div class="introduction">
             <img :src="fileData" />
-            <!-- <el-input
+            <el-input
               v-model="blogData.info.introduce"
               class="input"
               type="textarea"
               placeholder="文章介绍"
-            ></el-input> -->
+            ></el-input>
           </div>
         </el-card>
       </el-col>
