@@ -115,13 +115,14 @@ getUserInfo()
   .image {
     width: 100px;
     height: 100px;
-    background-color: #{$--day-main-color};
+    background-color: var(--sub-color);
     border-radius: 50%;
     // height: 100vw;
   }
   .name {
     font-size: 22px;
     margin-top: 15px;
+    color: var(--text-color);
   }
   .position {
     margin-top: 10px;
@@ -131,32 +132,32 @@ getUserInfo()
 }
 .cart {
   width: 100%;
-  border: 1px solid #eaeaea;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
   padding: 30px;
-  border: 1px solid #eaeaea;
+  border: 1px solid var(--border-color);
   margin-bottom: 30px;
   h3 {
     margin: 0;
   }
   hr {
     margin: 15px 0 0 0;
-    border-color: #eaeaea;
+    // border-color: var(--border-color);
     border: none;
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid var(--border-color);
     margin: 15px 0 0;
   }
   .introduce {
     margin: 15px 0;
     font-size: 14px;
-    color: #444444;
   }
   .info {
     span {
       margin-right: 20px;
       font-size: 14px;
-      color: #999999;
+      color: var(--text-color2);
+      // color: #999999;
     }
   }
 }

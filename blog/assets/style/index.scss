@@ -1,16 +1,14 @@
-@import "./variables-day.scss";
+@import "./variable.scss";
 @import "./def.scss";
 
-.dark {
-  body {
-    // background-color: #222;
-  }
+*{
+  transition: 0.5s;
 }
-
 body {
   margin: 0;
   padding: 0;
-  background-color: #{$--day-sub-color};
+  background-color: var(--sub-color);
+  color: var(--text-color1);
 }
 
 div{
@@ -19,7 +17,11 @@ div{
 
 a{
   text-decoration:none;
-  color: #000000;
+  color: var(--text-color1);
+}
+
+h1,h2,h3,h4,h5,h6{
+  color: var(--text-color);
 }
 
 .main {
@@ -30,17 +32,17 @@ a{
   // padding: 20px;
   .main_title {
     width: 100%;
-    height: #{$--day-top-bar-height};
-    background-color: #{$--day-main-color};
-    border-bottom: 1px solid #{$--day-shadow-color};
+    height: #{$--top-bar-height};
+    background-color: var(--main-color);
+    border-bottom: 1px solid var(--border-color);
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1;
   }
   .main_content {
-    width: #{$--day-main-width};
-    margin: #{$--day-top-bar-height} auto 0;
+    width: #{$--main-width};
+    margin: #{$--top-bar-height} auto 0;
     padding-top: 25px;
     .page {
       width: 100%;
@@ -48,7 +50,7 @@ a{
       justify-content: space-between;
       .left-box {
         position: sticky;
-        height: calc(100vh - #{$--day-top-bar-height} - 25px);
+        height: calc(100vh - #{$--top-bar-height} - 25px);
         top: 80px;
         left: 0;
         flex: 0 0 288px;
@@ -85,11 +87,11 @@ a{
 
 .container {
   width: 100%;
-  border-bottom: 1px solid #{$--day-border-color};
+  border-bottom: 1px solid var(--border-color);
   padding: 25px 0;
   .title {
     font-size: 14px;
-    color: #666666;
+    color: var(--text-color);
   }
   ul {
     margin-top: 15px;
@@ -102,7 +104,7 @@ a{
       margin: 5px 0;
       .icon {
         margin-right: 10px;
-        color: #666666;
+        color: var(--text-color);
       }
     }
   }
@@ -110,11 +112,11 @@ a{
 
 .cart {
   width: 100%;
-  border: 1px solid #{$--day-border-color};
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
   padding: 30px;
-  border: 1px solid #{$--day-border-color};
+  border: 1px solid var(--border-color);
   margin-bottom: 30px;
-  background-color: #{$--day-main-color};
+  background-color: var(--main-color);
 }

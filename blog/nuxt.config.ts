@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "./assets/style/variables-day.scss";',
+          additionalData: '@import "./assets/style/variable.scss";',
         },
       },
     },

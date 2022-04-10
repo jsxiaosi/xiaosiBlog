@@ -98,7 +98,7 @@ const back = () => {
       </div>
       <div class="container">
         <div class="article_title">
-          <span>{{ info.title }}</span>
+          <h3>{{ info.title }}</h3>
         </div>
       </div>
       <div class="container">
@@ -134,11 +134,14 @@ const back = () => {
 <style lang="scss" scoped>
 .article_title {
   padding: 20px;
-  border-bottom: 1px solid #eaeaea;
+  border: 1px solid var(--border-color);
   padding: 25px 20px;
-  background-color: #eaeaea;
+  background-color: var(--sub-color2);
   flex-wrap: 500;
   border-radius: 8px;
+  h3{
+    margin: 0;
+  }
 }
 
 .return {
