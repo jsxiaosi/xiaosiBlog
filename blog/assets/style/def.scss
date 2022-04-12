@@ -49,6 +49,12 @@ iframe {
 
 .markdown {
   font-size: 14px;
+  ol,ul{
+    padding-left: 20px;
+  }
+  a{
+    color: #58a6ff;
+  }
   blockquote {
     padding: 0 10px;
     line-height: 30px;
