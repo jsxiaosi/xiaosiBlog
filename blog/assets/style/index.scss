@@ -2,13 +2,14 @@
 @import "./def.scss";
 
 *{
-  transition: 0.5s;
+  // transition: 0.5s;
 }
 body {
   margin: 0;
   padding: 0;
   background-color: var(--sub-color);
   color: var(--text-color1);
+  transition: 0.5s;
 }
 
 div{
