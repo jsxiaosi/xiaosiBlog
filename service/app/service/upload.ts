@@ -9,8 +9,6 @@ export default class UploadService extends Service {
     const ctx = this.ctx;
     const stream = await ctx.getFileStream();
     const fileName = stream.filename;
-    console.log('进来了是吗？')
-
     const target = path.join(this.config.baseDir, `app/public/comfiles/${stream.filename}`);
     const result = await new Promise((resolve, reject) => {
       const remoteFileStream = fs.createWriteStream(target);

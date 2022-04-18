@@ -13,9 +13,6 @@
       <div class="login-box">
         <div class="login-form">
           <h2 class="enter-x p-4">SuperCuteXiaoSi</h2>
-          <div class="enter-x"
-            >{{ t('sys.login.userName') }}：admin {{ t('sys.login.password') }}：admin123</div
-          >
           <div class="input-group user enter-x">
             <SvgIcon class-name="icon" name="iEL-avatar"></SvgIcon>
             <div>
@@ -99,7 +96,7 @@
     // const { error, config, code, request, response } = res;
     // console.log(error, config, code, request, response);
     if (res) {
-      localStorage.setItem('openId', JSON.stringify(res.openId));
+      sessionStorage.setItem('openId', JSON.stringify(res.openId));
       router.push('/');
     }
   };

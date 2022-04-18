@@ -38,7 +38,7 @@ route.beforeEach((to, _from, next) => {
     }
   }
 
-  const openId = localStorage.getItem('openId');
+  const openId = sessionStorage.getItem('openId');
   if (openId) {
     if (to.path === '/login') next(_from.path);
     else next();

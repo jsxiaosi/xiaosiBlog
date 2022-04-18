@@ -95,7 +95,7 @@ const interceptor: AxiosInterceptor = {
     let status;
     if (response) {
       if (response.status == 401) {
-        localStorage.removeItem('openId');
+        sessionStorage.removeItem('openId');
         console.log(route);
         route.push('/login');
       }

@@ -185,7 +185,7 @@
     console.log(file);
     const fileType = file.type.split('/')[1];
     let newFile = new File([file], `${info.title || ''}${new Date().getTime()}.${fileType}`, file);
-    const url = encodeURI(`${httpsUrl}/image/${newFile.name}.${fileType}`);
+    const url = encodeURI(`${httpsUrl}/image/${newFile.name}`);
     console.log(`<img src="${url}}" style="width:100%">`);
     const fileData = new File([await beforeAvatarUpload(newFile)], newFile.name, {
       type: newFile.type,

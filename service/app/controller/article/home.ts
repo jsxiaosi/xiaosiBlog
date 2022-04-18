@@ -175,6 +175,7 @@ export default class ArticleController extends Controller {
   public async updateArticle() {
     const { ctx, app } = this;
     const tmpArticle = ctx.request.body;
+    ctx.updateOrderNum(app, tmpArticle);
     const result = await app.mysql.update('article', tmpArticle);
     ctx.body = ctx.handleData(result);
   }
