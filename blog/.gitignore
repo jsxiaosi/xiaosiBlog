@@ -4,3 +4,5 @@ node_modules
 nuxt.d.ts
 .output
 .env
+package-lock.json
+pnpm-lock.yaml

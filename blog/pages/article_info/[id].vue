@@ -2,6 +2,8 @@
 import { marked } from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
+import { useDemoLeftBox } from '@/hook/close'
+const { closeLeftBox } = useDemoLeftBox()
 
 const config = useRuntimeConfig()
 
@@ -90,6 +92,9 @@ const back = () => {
 <template>
   <div class="page">
     <div class="left-box">
+      <div class="close" @click="closeLeftBox">
+        X
+      </div>
       <div class="container return">
         <NuxtLink class="pointer" :to="`/`">
           <i class="iconfont icon-fanhui" />

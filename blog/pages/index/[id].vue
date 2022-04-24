@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useDemoLeftBox } from '@/hook/close'
+const { closeLeftBox } = useDemoLeftBox()
 interface AccountType {
   name: string
   autograph: string
@@ -60,6 +62,9 @@ getUserInfo()
 <template>
   <div class="page">
     <div class="left-box">
+      <div class="close" @click="closeLeftBox">
+        X
+      </div>
       <div class="container flex-y-center" style="padding-top:0">
         <img class="image" src="@/assets/image/logo.png">
         <span class="name">{{ account.name }}</span>

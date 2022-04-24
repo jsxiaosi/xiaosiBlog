@@ -1,8 +1,14 @@
 <script setup lang="ts">
+import { useDemoLeftBox } from '@/hook/close'
+const { showLeftBox } = useDemoLeftBox()
 const color = useColorMode()
 function toggleDark() {
   color.value = color.value === 'dark' ? 'light' : 'dark'
 }
+// const showLeft = () => {
+//   const leftDemo = document.getElementsByClassName('left-box') as unknown as HTMLElement[]
+//   leftDemo[0].style.transform = 'translateX(0px)'
+// }
 </script>
 
 <!-- <script>
@@ -15,6 +21,7 @@ export default {
   <div class="main">
     <div class="main_title">
       <div class="head">
+        <img class="head_image" src="@/assets/image/logo.png" @click="showLeftBox">
         <NuxtLink :to="`/`">
           <h2>xiaosi blog</h2>
         </NuxtLink>
@@ -39,12 +46,18 @@ export default {
 <style lang="scss" scoped>
 // @import "@/assets/style/winodw.scss";
 .head {
-  width: #{$--main-width};
+  width: var(--main-width);
   height: 100%;
   margin: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  .head_image{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: none;
+  }
   h2 {
     margin: 0;
   }
