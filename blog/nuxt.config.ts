@@ -9,6 +9,17 @@ export default defineNuxtConfig({
         rel: 'icon', type: 'image/png', href: '/logo.png',
       },
     ],
+    meta: [
+      {
+        name: 'description', content: '读万卷书不如行万里路,行万里路不如阅人无数！千淘万漉虽心苦，吹尽狂沙始到金！',
+      },
+      {
+        name: 'Keywords', content: 'Vue,JavaScript,Nginx,Git,UniApp,Uni-App,Nuxt,React,前端,服务器,Linux,macOS,学习文档,笔记',
+      },
+    ],
+  },
+  build: {
+    extractCSS: true,
   },
   css: [
     '@/assets/iconfont/iconfont.css',

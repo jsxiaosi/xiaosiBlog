@@ -82,6 +82,12 @@ const { data } = await useFetch<{
 if (data) {
   info.value = data.value.data
   html.value = marked(info.value.article_content)
+  useHead({
+    titleTemplate: info.value.title,
+    meta: [
+      { name: 'description', content: info.value.introduce },
+    ],
+  })
 }
 
 const back = () => {
