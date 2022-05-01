@@ -70,7 +70,7 @@ getUserInfo()
         <span class="name">{{ account.name }}</span>
         <span class="position">{{ account.autograph }}</span>
       </div>
-      <div class="container">
+      <!-- <div class="container">
         <span class="title">信息：</span>
         <ul>
           <li>QQ：{{ account.qq }}</li>
@@ -81,7 +81,7 @@ getUserInfo()
           </li>
           <li>现居住地：{{ account.location }}</li>
         </ul>
-      </div>
+      </div> -->
       <div class="container">
         <span class="title">文章分类：</span>
         <ul>
