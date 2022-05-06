@@ -13,6 +13,7 @@ export default class ArticleController extends Controller {
                    article.title as title,
                    article.introduce as introduce,
                    FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime,
+                   DATE_FORMAT(article.update_time,'%Y-%m-%d %H:%i:%s' ) as update_time,
                    article.view_count as view_count,
                    type.typeName as typeName
                    FROM article LEFT JOIN type ON article.type_id = type.id 
@@ -26,6 +27,7 @@ export default class ArticleController extends Controller {
                   article.title as title,
                   article.introduce as introduce,
                   FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime,
+                   DATE_FORMAT(article.update_time,'%Y-%m-%d %H:%i:%s' ) as update_time,
                   article.view_count as view_count,
                   type.typeName as typeName
                   FROM article LEFT JOIN type ON article.type_id = type.id 
@@ -55,6 +57,7 @@ export default class ArticleController extends Controller {
                       article.introduce as introduce,
                       article.article_content as article_content,
                       FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime,
+                       DATE_FORMAT(article.update_time,'%Y-%m-%d %H:%i:%s' ) as update_time,
                       article.view_count as view_count,
                       type.typeName as typeName
                       FROM article LEFT JOIN type ON article.type_id = type.id WHERE article.id = ${id}`;
@@ -84,6 +87,7 @@ export default class ArticleController extends Controller {
                  article.title as title,
                  article.introduce as introduce,
                  FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime,
+                 DATE_FORMAT(article.update_time,'%Y-%m-%d %H:%i:%s' ) as update_time,
                  article.view_count as view_count,
                  article.isTop as isTop,
                  type.typeName as typeName
@@ -174,7 +178,9 @@ export default class ArticleController extends Controller {
   // 修改文章
   public async updateArticle() {
     const { ctx, app } = this;
-    const tmpArticle = ctx.request.body;
+    console.log('timetime',ctx.formatTime())
+    const tmpArticle = { ...ctx.request.body, update_time: ctx.formatTime()};
+    console.log(tmpArticle)
     ctx.updateOrderNum(app, tmpArticle);
     const result = await app.mysql.update('article', tmpArticle);
     ctx.body = ctx.handleData(result);

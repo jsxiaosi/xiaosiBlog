@@ -118,6 +118,10 @@
       prop: 'addTime',
     },
     {
+      label: '更新时间',
+      prop: 'update_time',
+    },
+    {
       label: '浏览量',
       prop: 'view_count',
     },

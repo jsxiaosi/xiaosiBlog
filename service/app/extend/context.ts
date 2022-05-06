@@ -1,3 +1,4 @@
+const sd = require('silly-datetime');
 
 export default {
   handleData(data: Record<string, any>) {
@@ -36,4 +37,7 @@ export default {
       }
     }
   },
+  formatTime() {
+    return sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+  }
 };

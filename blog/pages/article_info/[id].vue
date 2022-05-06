@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { marked } from 'marked'
 import hljs from 'highlight.js'
+import timeFrom from '@/utils/timeFrom'
 import 'highlight.js/styles/monokai-sublime.css'
 import { useDemoLeftBox } from '@/hook/close'
 const { closeLeftBox } = useDemoLeftBox()
@@ -122,7 +123,10 @@ const back = () => {
             <span>阅读量：{{ info.view_count }}</span>
           </li>
           <li>
-            <span>創建時間：{{ info.addTime }}</span>
+            <span>创建时间：{{ info.addTime }}</span>
+          </li>
+          <li>
+            <span>更新时间：{{ timeFrom(info.update_time || info.addTime, false) }}</span>
           </li>
         </ul>
       </div>
@@ -150,7 +154,8 @@ const back = () => {
   background-color: var(--sub-color2);
   flex-wrap: 500;
   border-radius: 8px;
-  h3{
+
+  h3 {
     margin: 0;
   }
 }
@@ -158,6 +163,7 @@ const back = () => {
 .return {
   font-size: 14px;
   padding-top: 0;
+
   i {
     margin-right: 10px;
   }

@@ -38,6 +38,7 @@
     "egg-mock": "^3.16.0",
     "eslint": "^6.7.2",
     "eslint-config-egg": "^8.0.0",
+    "silly-datetime": "^0.1.2",
     "tslib": "^1.9.0",
     "typescript": "^3.0.0"
   },

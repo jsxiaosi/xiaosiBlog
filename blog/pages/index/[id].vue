@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useDemoLeftBox } from '@/hook/close'
+import timeFrom from '@/utils/timeFrom'
 const { closeLeftBox } = useDemoLeftBox()
 interface AccountType {
   name: string
@@ -106,7 +107,8 @@ getUserInfo()
           {{ item.introduce }}
         </div>
         <div class="info flex-x">
-          <span>{{ item.addTime }}</span>
+          <span>创建时间：{{ item.addTime }}</span>
+          <span>更新时间：{{ timeFrom(item.update_time || item.addTime, false) }}</span>
           <span>分类：{{ item.typeName }}</span>
           <span>阅读量：{{ item.view_count }}</span>
         </div>
@@ -124,17 +126,20 @@ getUserInfo()
     border-radius: 50%;
     // height: 100vw;
   }
+
   .name {
     font-size: 22px;
     margin-top: 15px;
     color: var(--text-color);
   }
+
   .position {
     margin-top: 10px;
     font-size: 16px;
     color: #555555;
   }
 }
+
 .cart {
   width: 100%;
   border: 1px solid var(--border-color);
@@ -143,9 +148,11 @@ getUserInfo()
   padding: 30px;
   border: 1px solid var(--border-color);
   margin-bottom: 30px;
+
   h3 {
     margin: 0;
   }
+
   hr {
     margin: 15px 0 0 0;
     // border-color: var(--border-color);
@@ -153,10 +160,12 @@ getUserInfo()
     border-bottom: 1px solid var(--border-color);
     margin: 15px 0 0;
   }
+
   .introduce {
     margin: 15px 0;
     font-size: 14px;
   }
+
   .info {
     span {
       margin-right: 20px;
