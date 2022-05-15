@@ -11,6 +11,8 @@ logs/
 *.lock
 *.js
 !.autod.conf.js
+typings/
+package-lock.json
 
 app/**/*.js
 test/**/*.js
