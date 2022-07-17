@@ -24,9 +24,9 @@
 - 获取项目代码（https or ssh）
 
 ```bash
-git clone https://github.com/SuperCuteXiaoSi/xiaosiBlog.git
+git clone https://github.com/jsxiaosi/xiaosiBlog.git
 
-git clone git@github.com:SuperCuteXiaoSi/xiaosiBlog.git
+git clone git@github.com:jsxiaosi/xiaosiBlog.git
 ```
 
 ### 服务端
@@ -100,7 +100,7 @@ npm run start
 ```
 
 ### 后台
-后台使用的是[xiaosiAdmin](https://github.com/SuperCuteXiaoSi/xiaosiAdmin)模板开发，详细内容请查看[项目详情](https://github.com/SuperCuteXiaoSi/xiaosiAdmin)
+后台使用的是[xiaosiAdmin](https://github.com/jsxiaosi/xiaosiAdmin)模板开发，详细内容请查看[项目详情](https://github.com/jsxiaosi/xiaosiAdmin)
 - 安装依赖
 
 ```bash
@@ -156,7 +156,7 @@ npm run start
 
 ## 维护者
 
-[@SuperCuteXiaoSi](https://github.com/SuperCuteXiaoSi)
+[@jsxiaosi](https://github.com/jsxiaosi)
 
 
 ## License
