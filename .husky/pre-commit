@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+cd admin && npm run lint:staged && npm run lint:pretty
+
+cd ../
+
+cd blog && npm run lint
+
+cd ../
+
+cd service && npm run lint
+
+cd ../
+
+git add .

@@ -1,4 +1,4 @@
-import { defineNuxtConfig } from 'nuxt'
+import { defineNuxtConfig } from 'nuxt/config'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
@@ -6,28 +6,29 @@ export default defineNuxtConfig({
     title: '小斯博客',
     link: [
       {
-        rel: 'icon', type: 'image/png', href: '/logo.png',
+        rel: 'icon',
+        type: 'image/png',
+        href: '/logo.png',
       },
     ],
     meta: [
       {
-        name: 'description', content: '读万卷书不如行万里路,行万里路不如阅人无数！千淘万漉虽心苦，吹尽狂沙始到金！',
+        name: 'description',
+        content:
+          '读万卷书不如行万里路,行万里路不如阅人无数！千淘万漉虽心苦，吹尽狂沙始到金！',
       },
       {
-        name: 'Keywords', content: 'Vue,JavaScript,Nginx,Git,UniApp,Uni-App,Nuxt,React,前端,服务器,Linux,macOS,学习文档,笔记',
+        name: 'Keywords',
+        content:
+          'Vue,JavaScript,Nginx,Git,UniApp,Uni-App,Nuxt,React,前端,服务器,Linux,macOS,学习文档,笔记',
       },
     ],
   },
   build: {
     extractCSS: true,
   },
-  css: [
-    '@/assets/iconfont/iconfont.css',
-    '@/assets/style/index.scss',
-  ],
-  buildModules: [
-    '@vueuse/nuxt',
-  ],
+  css: ['@/assets/iconfont/iconfont.css', '@/assets/style/index.scss'],
+  buildModules: ['@vueuse/nuxt'],
   vueuse: {
     ssrHandlers: true,
   },

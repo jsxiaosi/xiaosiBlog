@@ -7,7 +7,6 @@
 function timeFrom(dateInfo = null, format: string | boolean = 'yyyy-mm-dd') {
   let dateTime
   // 如果为null,则格式化当前时间
-  console.log('dateTime', dateInfo)
   if (!dateInfo)
     dateTime = Number(new Date())
   else dateTime = new Date(dateInfo).getTime()
@@ -36,9 +35,7 @@ function timeFrom(dateInfo = null, format: string | boolean = 'yyyy-mm-dd') {
       if (format === false) {
         if (timer >= 2592000 && timer < 365 * 86400)
           tips = `${parseInt((timer / (86400 * 30)).toString())}个月前`
-
-        else
-          tips = `${parseInt((timer / (86400 * 365)).toString())}年前`
+        else tips = `${parseInt((timer / (86400 * 365)).toString())}年前`
       }
       else {
         tips = dateInfo

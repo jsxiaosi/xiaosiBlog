@@ -31,7 +31,7 @@ const account = ref<AccountType>({
   location: '',
 })
 
-const getBlogList = async() => {
+const getBlogList = async () => {
   const { data } = await useFetch<{
     topList: any[]
     type: any[]
@@ -46,7 +46,7 @@ const getBlogList = async() => {
 
 getBlogList()
 
-const getUserInfo = async() => {
+const getUserInfo = async () => {
   const { data } = await useFetch<{
     userInfo: AccountType
   }>(`${config.baseURL}/api/blog/userInfo`, { params: { id: '1' } })
@@ -57,7 +57,6 @@ const getUserInfo = async() => {
 }
 
 getUserInfo()
-
 </script>
 
 <template>
@@ -66,7 +65,7 @@ getUserInfo()
       <div class="close" @click="closeLeftBox">
         X
       </div>
-      <div class="container flex-y-center" style="padding-top:0">
+      <div class="container flex-y-center" style="padding-top: 0">
         <img class="image" src="@/assets/image/logo.png">
         <span class="name">{{ account.name }}</span>
         <span class="position">{{ account.autograph }}</span>
@@ -108,7 +107,9 @@ getUserInfo()
         </div>
         <div class="info flex-x">
           <span>创建时间：{{ item.addTime }}</span>
-          <span>更新时间：{{ timeFrom(item.update_time || item.addTime, false) }}</span>
+          <span>更新时间：{{
+            timeFrom(item.update_time || item.addTime, false)
+          }}</span>
           <span>分类：{{ item.typeName }}</span>
           <span>阅读量：{{ item.view_count }}</span>
         </div>

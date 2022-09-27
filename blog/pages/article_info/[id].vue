@@ -22,29 +22,38 @@ const add = (text: string, level: number) => {
   const anchor = `toc${level}${++index.value}`
   const item = { anchor, level, text }
   const items: TocItem[] = tocItems.value
-  if (items.length === 0) { // 第一个 item 直接 push
+  if (items.length === 0) {
+    // 第一个 item 直接 push
     items.push(item)
   }
   else {
-    let lastItem = items[items.length > 0 ? items.length - 1 : items.length] as TocItem // 最后一个 item
+    let lastItem = items[
+      items.length > 0 ? items.length - 1 : items.length
+    ] as TocItem // 最后一个 item
 
-    if (item.level > lastItem.level) { // item 是 lastItem 的 children
+    if (item.level > lastItem.level) {
+      // item 是 lastItem 的 children
       for (let i = lastItem.level + 1; i <= 2; i++) {
         const { children } = lastItem
-        if (!children) { // 如果 children 不存在
+        if (!children) {
+          // 如果 children 不存在
           lastItem.children = [item]
           break
         }
 
-        lastItem = children[children.length > 0 ? children.length - 1 : children.length] as TocItem // 重置 lastItem 为 children 的最后一个 item
+        lastItem = children[
+          children.length > 0 ? children.length - 1 : children.length
+        ] as TocItem // 重置 lastItem 为 children 的最后一个 item
 
-        if (item.level <= lastItem.level) { // item level 小于或等于 lastItem level 都视为与 children 同级
+        if (item.level <= lastItem.level) {
+          // item level 小于或等于 lastItem level 都视为与 children 同级
           children.push(item)
           break
         }
       }
     }
-    else { // 置于最顶级
+    else {
+      // 置于最顶级
       items.push(item)
     }
   }
@@ -53,7 +62,7 @@ const add = (text: string, level: number) => {
 }
 
 const renderer = new marked.Renderer()
-renderer.heading = function(text, level, raw) {
+renderer.heading = function (text, level, raw) {
   const anchor = add(text, level)
   return `<a id=${anchor} name=${anchor} class="anchor-fix"><h${level}>${text}</h${level}></a>\n`
 }
@@ -85,9 +94,7 @@ if (data) {
   html.value = marked(info.value.article_content)
   useHead({
     titleTemplate: info.value.title,
-    meta: [
-      { name: 'description', content: info.value.introduce },
-    ],
+    meta: [{ name: 'description', content: info.value.introduce }],
   })
 }
 
@@ -103,7 +110,7 @@ const back = () => {
         X
       </div>
       <div class="container return">
-        <NuxtLink class="pointer" :to="`/`">
+        <NuxtLink class="pointer" to="/">
           <i class="iconfont icon-fanhui" />
           <span>返回</span>
         </NuxtLink>
@@ -126,7 +133,9 @@ const back = () => {
             <span>创建时间：{{ info.addTime }}</span>
           </li>
           <li>
-            <span>更新时间：{{ timeFrom(info.update_time || info.addTime, false) }}</span>
+            <span>更新时间：{{
+              timeFrom(info.update_time || info.addTime, false)
+            }}</span>
           </li>
         </ul>
       </div>

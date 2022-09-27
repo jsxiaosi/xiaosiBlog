@@ -1,13 +1,11 @@
 import { Controller } from 'egg';
 
 export default class AdminController extends Controller {
-
   // 判断用户名密码是否正确
   public async checkLogin() {
-
     const { ctx, app } = this;
 
-    console.log(ctx.get('x-csrf-token'))
+    console.log(ctx.get('x-csrf-token'));
 
     const { userName, password } = ctx.request.body;
 
@@ -24,7 +22,8 @@ export default class AdminController extends Controller {
           data: {
             openId,
             msg: '登陆成功',
-          }, code: 1
+          },
+          code: 1,
         };
       } else {
         ctx.body = {
@@ -41,16 +40,16 @@ export default class AdminController extends Controller {
   }
 
   public async getToken() {
-    const { ctx } = this
+    const { ctx } = this;
 
-    const csrf = ctx.csrf
-    ctx.state.csrf = csrf
+    const csrf = ctx.csrf;
+    ctx.state.csrf = csrf;
     ctx.body = {
       code: 1,
       data: {
         token: csrf,
-        msg: '成功'
-      }
+        msg: '成功',
+      },
     };
   }
 
@@ -62,8 +61,7 @@ export default class AdminController extends Controller {
                   WHERE  id = ${id}`;
     const userInfo = await app.mysql.query(sql);
     ctx.body = {
-      userInfo:userInfo[0]
+      userInfo: userInfo[0],
     };
   }
 }
-

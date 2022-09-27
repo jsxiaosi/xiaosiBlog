@@ -16,22 +16,22 @@ export default (appInfo: EggAppInfo) => {
   };
 
   config.security = {
-    csrf: { 
+    csrf: {
       // enable: true ,
-      headerName: 'x-csrf-token'
+      headerName: 'x-csrf-token',
     },
-    domainWhiteList: ['*'],
+    domainWhiteList: [ '*' ],
   };
 
-  config.session =  {
+  config.session = {
     key: 'TOKEN',
     maxAge: 2 * 3600 * 1000, // 2 小时
     httpOnly: true,
     encrypt: false,
     renew: true,
     sameSite: 'none',
-    secure:false
-  },
+    secure: false,
+  };
 
   config.cors = {
     credentials: true, // 允许Cook可以跨域

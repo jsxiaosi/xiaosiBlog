@@ -30,14 +30,17 @@ export default {
     if (oldTypeId[0]) {
       if (oldTypeId[0].type_id !== type_id) {
         console.log(oldTypeId);
-        const sql = 'UPDATE type SET orderNum = (orderNum-1) WHERE id =' + oldTypeId[0].type_id;
-        await app.mysql.query(sql) as EggMySQLUpdateResult;
-        const sql2 = 'UPDATE type SET orderNum = (orderNum+1) WHERE id =' + type_id;
-        await app.mysql.query(sql2) as EggMySQLUpdateResult;
+        const sql =
+          'UPDATE type SET orderNum = (orderNum-1) WHERE id =' +
+          oldTypeId[0].type_id;
+        (await app.mysql.query(sql)) as EggMySQLUpdateResult;
+        const sql2 =
+          'UPDATE type SET orderNum = (orderNum+1) WHERE id =' + type_id;
+        (await app.mysql.query(sql2)) as EggMySQLUpdateResult;
       }
     }
   },
   formatTime() {
     return sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
-  }
+  },
 };

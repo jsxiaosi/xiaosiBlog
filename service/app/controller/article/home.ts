@@ -2,7 +2,6 @@ import { Controller } from 'egg';
 // const fs = require('fs');
 
 export default class ArticleController extends Controller {
-
   // 客户端首页文章列表接口
   async blogArticleList() {
     const { ctx, app } = this;
@@ -17,7 +16,9 @@ export default class ArticleController extends Controller {
                    article.view_count as view_count,
                    type.typeName as typeName
                    FROM article LEFT JOIN type ON article.type_id = type.id 
-                   WHERE article.isTop = 0  AND article.type_id = ${id ? id : 'type.id'} 
+                   WHERE article.isTop = 0  AND article.type_id = ${
+  id ? id : 'type.id'
+} 
                    ORDER BY article.id DESC`;
 
     const resList = await app.mysql.query(sql);
@@ -31,14 +32,15 @@ export default class ArticleController extends Controller {
                   article.view_count as view_count,
                   type.typeName as typeName
                   FROM article LEFT JOIN type ON article.type_id = type.id 
-                  WHERE article.isTop = 1  AND article.type_id = ${id ? id : 'type.id'} 
+                  WHERE article.isTop = 1  AND article.type_id = ${
+  id ? id : 'type.id'
+} 
                   ORDER BY article.id DESC`;
     const resTopList = await app.mysql.query(sql2);
     ctx.body = {
       list: resList,
       type: resType,
       topList: resTopList,
-
     };
   }
 
@@ -48,8 +50,11 @@ export default class ArticleController extends Controller {
     console.log(ctx.query);
     const id = ctx.query.id;
     if (id) {
-      const sql1 = 'UPDATE article SET view_count = (view_Count+1) WHERE id =' + id;
-      const updateResult = await app.mysql.query(sql1) as EggMySQLUpdateResult;
+      const sql1 =
+        'UPDATE article SET view_count = (view_Count+1) WHERE id =' + id;
+      const updateResult = (await app.mysql.query(
+        sql1,
+      )) as EggMySQLUpdateResult;
       const updateSuccess = updateResult.affectedRows === 1;
       if (updateSuccess) {
         const sql2 = `SELECT article.id as id,
@@ -61,7 +66,7 @@ export default class ArticleController extends Controller {
                       article.view_count as view_count,
                       type.typeName as typeName
                       FROM article LEFT JOIN type ON article.type_id = type.id WHERE article.id = ${id}`;
-        const result = await app.mysql.query(sql2) as EggMySQLUpdateResult;
+        const result = (await app.mysql.query(sql2)) as EggMySQLUpdateResult;
         // const result = await app.mysql.select('article', {
         //   where: { id },
         // });
@@ -118,13 +123,20 @@ export default class ArticleController extends Controller {
   // 添加文章
   public async addArticle() {
     const { ctx, app } = this;
-    const tmpArticle = { ...ctx.request.body, addTime: new Date().getTime() / 1000 };
+    const tmpArticle = {
+      ...ctx.request.body,
+      addTime: new Date().getTime() / 1000,
+    };
 
-    const sql = 'UPDATE type SET orderNum = (orderNum+1) WHERE id =' + tmpArticle.type_id;
-    const updateResult = await app.mysql.query(sql) as EggMySQLUpdateResult;
+    const sql =
+      'UPDATE type SET orderNum = (orderNum+1) WHERE id =' + tmpArticle.type_id;
+    const updateResult = (await app.mysql.query(sql)) as EggMySQLUpdateResult;
     const updateSuccess = updateResult.affectedRows === 1;
     if (updateSuccess) {
-      const result = await app.mysql.insert('article', tmpArticle) as unknown as EggMySQLUpdateResult;
+      const result = (await app.mysql.insert(
+        'article',
+        tmpArticle,
+      )) as unknown as EggMySQLUpdateResult;
       ctx.body = ctx.handleData(result);
     } else {
       ctx.body = {
@@ -174,13 +186,12 @@ export default class ArticleController extends Controller {
     // };
   }
 
-
   // 修改文章
   public async updateArticle() {
     const { ctx, app } = this;
-    console.log('timetime',ctx.formatTime())
-    const tmpArticle = { ...ctx.request.body, update_time: ctx.formatTime()};
-    console.log(tmpArticle)
+    console.log('timetime', ctx.formatTime());
+    const tmpArticle = { ...ctx.request.body, update_time: ctx.formatTime() };
+    console.log(tmpArticle);
     ctx.updateOrderNum(app, tmpArticle);
     const result = await app.mysql.update('article', tmpArticle);
     ctx.body = ctx.handleData(result);
@@ -190,7 +201,11 @@ export default class ArticleController extends Controller {
   public async updateIsTop() {
     const { ctx, app } = this;
     const tmpArticle = ctx.request.body;
-    const sql = 'update  article set isTop = ' + tmpArticle.isTop + ' where id = ' + tmpArticle.id;
+    const sql =
+      'update  article set isTop = ' +
+      tmpArticle.isTop +
+      ' where id = ' +
+      tmpArticle.id;
     const updateResult = await app.mysql.query(sql);
     ctx.body = ctx.handleData(updateResult);
   }
@@ -204,8 +219,10 @@ export default class ArticleController extends Controller {
     const res = await app.mysql.delete('article', { id });
     if (res.affectedRows) {
       if (getTypeId[0]) {
-        const sql = 'UPDATE type SET orderNum = (orderNum-1) WHERE id =' + getTypeId[0].type_id;
-        await app.mysql.query(sql) as EggMySQLUpdateResult;
+        const sql =
+          'UPDATE type SET orderNum = (orderNum-1) WHERE id =' +
+          getTypeId[0].type_id;
+        (await app.mysql.query(sql)) as EggMySQLUpdateResult;
       }
 
       ctx.body = { data: { msg: '删除成功' }, code: 1 };
@@ -214,4 +231,3 @@ export default class ArticleController extends Controller {
     }
   }
 }
-
