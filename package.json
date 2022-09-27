@@ -11,6 +11,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cd service && npm run dev & cd admin && npm run dev & cd blog && npm run dev",
     "commit": "git-cz",
+    "lint:admin": "cd admin && npm run lint:staged && npm run lint:pretty",
+    "lint:blog": "cd blog && npm run lint",
+    "lint:service": "cd service && npm run lint",
     "prepare": "husky install"
   },
   "devDependencies": {

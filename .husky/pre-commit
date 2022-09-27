@@ -1,16 +1,10 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-cd admin && npm run lint:staged && npm run lint:pretty
+npm run lint:admin
 
-cd ../
+npm run lint:blog
 
-cd blog && npm run lint
-
-cd ../
-
-cd service && npm run lint
-
-cd ../
+npm run lint:service
 
 git add .
