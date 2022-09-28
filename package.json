@@ -9,7 +9,10 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cd service && npm run dev & cd admin && npm run dev & cd blog && npm run dev",
+    "dev": "npm run dev:admin && npm run dev:service && npm run dev:blog",
+    "dev:admin": "cd admin && npm run dev",
+    "dev:service": "cd service && npm run dev",
+    "dev:blog": "cd blog && npm run dev",
     "commit": "git-cz",
     "lint:admin": "cd admin && npm run lint:staged && npm run lint:pretty",
     "lint:blog": "cd blog && npm run lint",

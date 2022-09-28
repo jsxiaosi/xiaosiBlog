@@ -17,7 +17,7 @@ export default (appInfo: EggAppInfo) => {
 
   config.security = {
     csrf: {
-      // enable: true ,
+      enable: false,
       headerName: 'x-csrf-token',
     },
     domainWhiteList: [ '*' ],
