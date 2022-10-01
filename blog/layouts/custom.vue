@@ -75,7 +75,7 @@ export default {
         </div>
       </div>
     </div>
-    <div class="main_content">
+    <div class="blog_content">
       <slot />
     </div>
   </div>

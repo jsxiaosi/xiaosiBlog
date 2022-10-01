@@ -29,8 +29,8 @@ export default (appInfo: EggAppInfo) => {
     httpOnly: true,
     encrypt: false,
     renew: true,
-    sameSite: 'none',
-    secure: false,
+    // sameSite: 'none',
+    // secure: false,
   };
 
   config.cors = {

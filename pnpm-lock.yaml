@@ -170,6 +170,7 @@ importers:
       lodash: ^4.17.21
       marked: ^4.1.0
       nuxt: ^3.0.0-rc.11
+      particles.js: ^2.0.0
       sass: ^1.55.0
       typescript: ^4.8.3
       vue: ^3.2.39
@@ -179,6 +180,7 @@ importers:
       highlight.js: 11.6.0
       lodash: 4.17.21
       marked: 4.1.0
+      particles.js: 2.0.0
     devDependencies:
       "@vueuse/core": 9.3.0_vue@3.2.40
       "@vueuse/nuxt": 9.3.0_jzuo2keo4fo3uqanfnsu3akrmm
@@ -14861,6 +14863,13 @@ packages:
         integrity: sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==,
       }
     engines: { node: ">= 0.8" }
+
+  /particles.js/2.0.0:
+    resolution:
+      {
+        integrity: sha512-8e0JIqkRbMMPlFBnF9f+92hX1s07jdkd3tqB8uHE9L+cwGGjIYjQM7QLgt0FQ5MZp6SFFYYDm/Y48pqK3ZvJOQ==,
+      }
+    dev: false
 
   /pascal-case/2.0.1:
     resolution:

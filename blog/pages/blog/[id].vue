@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { useDemoLeftBox } from '@/hook/close'
 import timeFrom from '@/utils/timeFrom'
+
+definePageMeta({
+  layout: 'custom',
+})
+
 const { closeLeftBox } = useDemoLeftBox()
 interface AccountType {
   name: string

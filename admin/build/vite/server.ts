@@ -5,6 +5,7 @@ export function createViteServer(): ServerOptions {
     // 服务器主机名，如果允许外部访问，可设置为"0.0.0.0"
     host: true,
     // 服务器端口号
+    port: 3000,
     // 端口已被占用时是否尝试使用下一个可用的端口 true：直接退出，而不是尝试下一个可用端口 false：尝试下一个可用端口
     strictPort: false,
     // boolean | string 启动项目时自动在浏览器打开应用程序；如果为string，比如"/index.html"，会打开http://localhost:3000/index.html

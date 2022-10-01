@@ -18,6 +18,9 @@ export default class AdminController extends Controller {
         // 登录成功,进行session缓存
         const openId = new Date().getTime();
         ctx.session.openId = { openId };
+
+        console.log('ctx.session', ctx.session);
+
         ctx.body = {
           data: {
             openId,
@@ -43,6 +46,11 @@ export default class AdminController extends Controller {
     const { ctx } = this;
 
     const csrf = ctx.csrf;
+    // ctx.cookies.set('username', 'zhangsan');
+
+    const openId = new Date().getTime();
+    ctx.session.openId = { openId };
+
     ctx.state.csrf = csrf;
     ctx.body = {
       code: 1,

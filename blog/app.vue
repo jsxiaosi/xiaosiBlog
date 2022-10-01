@@ -1,11 +1,9 @@
-<script>
-export default {
-  layout: 'custom',
-}
+<script lang="ts" setup>
+useColorMode()
 </script>
 
 <template>
-  <NuxtLayout name="custom">
+  <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
 </template>

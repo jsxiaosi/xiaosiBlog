@@ -116,6 +116,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
       timeout: 10 * 1000,
       // (拦截器)数据处理方式
       interceptor,
+      credentials: true,
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
       // 配置项，下面的选项都可以在独立的接口请求中覆盖
