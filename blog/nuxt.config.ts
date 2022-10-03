@@ -2,6 +2,7 @@ import { defineNuxtConfig } from 'nuxt/config'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
+  ssr: true,
   meta: {
     title: '小斯博客',
     link: [

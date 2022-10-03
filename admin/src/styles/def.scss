@@ -1,50 +1,46 @@
-pre{
+pre {
   display: block;
-  background-color:#f3f3f3;
-   padding: .5rem !important;
-   overflow-y: auto;
-   font-weight: 300;
-   font-family: Menlo, monospace;
-   border-radius: .3rem;
+  background-color: #f3f3f3;
+  padding: 0.5rem !important;
+  overflow-y: auto;
+  font-weight: 300;
+  font-family: Menlo, monospace;
+  border-radius: 0.3rem;
 }
-pre{
+pre {
   background-color: #283646 !important;
 }
-pre >code{
-  border:0px !important;
+pre > code {
+  border: 0px !important;
   background-color: #283646 !important;
-  color:#FFF;
-
+  color: #fff;
 }
 code {
-  display: inline-block ;
-  background-color:#f3f3f3;
-  border:1px solid #fdb9cc;
-  border-radius:3px;
+  display: inline-block;
+  background-color: #f3f3f3;
+  border: 1px solid #fdb9cc;
+  border-radius: 3px;
   font-size: 12px;
   padding-left: 5px;
   padding-right: 5px;
-  color:#4f4f4f;
+  color: #4f4f4f;
   margin: 0px 3px;
-
 }
-iframe{
+iframe {
   height: 34rem;
 }
 
 // 设置描点边距
-.anchor-fix{
+.anchor-fix {
   display: block;
-  margin-top: -54px;
-  padding-top: 54px;
-  h2{
+  h2 {
     // margin: 0;
     border-left: 3px solid #ccc;
     background-color: #eaeaea;
     padding: 10px;
     color: #444;
   }
-  h3{
+  h3 {
     border-bottom: 1px dashed #ccc;
     padding: 10px;
     color: #444;

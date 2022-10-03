@@ -19,7 +19,7 @@ code {
   // background-color: #f3f3f3;
   border: 1px solid #618dbf;
   border-radius: 3px;
-  font-size: 12px;
+  font-size: var(--font-size-sm);
   padding-left: 5px;
   padding-right: 5px;
   // color: #4f4f4f;
@@ -32,8 +32,6 @@ iframe {
 // 设置描点边距
 .anchor-fix {
   display: block;
-  margin-top: -54px;
-  padding-top: 54px;
   h2 {
     // margin: 0;
     border-left: 3px solid var(--border-color);
@@ -48,12 +46,13 @@ iframe {
 }
 
 .markdown {
-  font-size: 14px;
+  font-size: var(--font-size);
   line-height: 30px;
-  ol,ul{
+  ol,
+  ul {
     padding-left: 20px;
   }
-  a{
+  a {
     color: #58a6ff;
   }
   blockquote {
@@ -67,7 +66,7 @@ iframe {
     font-weight: 550;
     margin-right: 0;
   }
-  img{
+  img {
     border-radius: 5px;
     border: 1px solid var(--border-color);
     // padding: 2px;

@@ -15,11 +15,11 @@ function toGithub() {
 </script>
 
 <template>
-  <div class="nav">
-    <div>小斯</div>
+  <div class="flex-x nav">
+    <div />
 
     <div class="rigth">
-      <NuxtLink to="/blog/0">
+      <NuxtLink to="/blog">
         博客
       </NuxtLink>
       <NuxtLink to="/">
@@ -39,13 +39,8 @@ function toGithub() {
 .nav {
   width: 100%;
   padding: var(--padding);
-  display: flex;
   align-items: center;
   justify-content: space-between;
-
-  .iconfont {
-    font-size: 19px;
-  }
 
   .rigth {
     display: grid;

@@ -17,7 +17,7 @@ export default class ArticleController extends Controller {
                    type.typeName as typeName
                    FROM article LEFT JOIN type ON article.type_id = type.id 
                    WHERE article.isTop = 0  AND article.type_id = ${
-  id ? id : 'type.id'
+  id !== '0' ? id : 'type.id'
 } 
                    ORDER BY article.id DESC`;
 

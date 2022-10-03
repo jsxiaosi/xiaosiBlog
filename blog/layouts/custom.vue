@@ -5,17 +5,7 @@ const color = useColorMode()
 function toggleDark() {
   color.value = color.value === 'dark' ? 'light' : 'dark'
 }
-// const showLeft = () => {
-//   const leftDemo = document.getElementsByClassName('left-box') as unknown as HTMLElement[]
-//   leftDemo[0].style.transform = 'translateX(0px)'
-// }
 </script>
-
-<!-- <script>
-export default {
-  layout: "custom",
-}
-</script> -->
 
 <template>
   <div class="main">
