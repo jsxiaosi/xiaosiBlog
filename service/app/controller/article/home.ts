@@ -16,7 +16,7 @@ export default class ArticleController extends Controller {
                    article.view_count as view_count,
                    type.typeName as typeName
                    FROM article LEFT JOIN type ON article.type_id = type.id 
-                   WHERE article.isTop = 0  AND article.type_id = ${
+                   WHERE article.isTop = 0 AND article.state != 0  AND article.type_id = ${
   id !== '0' ? id : 'type.id'
 } 
                    ORDER BY article.id DESC`;
@@ -32,8 +32,8 @@ export default class ArticleController extends Controller {
                   article.view_count as view_count,
                   type.typeName as typeName
                   FROM article LEFT JOIN type ON article.type_id = type.id 
-                  WHERE article.isTop = 1  AND article.type_id = ${
-  id ? id : 'type.id'
+                  WHERE article.isTop = 1 AND article.state != 0  AND article.type_id = ${
+  id !== '0' ? id : 'type.id'
 } 
                   ORDER BY article.id DESC`;
     const resTopList = await app.mysql.query(sql2);
@@ -47,7 +47,6 @@ export default class ArticleController extends Controller {
   // 客户端得到详细页文章接口
   public async blogGetArticleInfo() {
     const { ctx, app } = this;
-    console.log(ctx.query);
     const id = ctx.query.id;
     if (id) {
       const sql1 =
@@ -70,7 +69,13 @@ export default class ArticleController extends Controller {
         // const result = await app.mysql.select('article', {
         //   where: { id },
         // });
-        ctx.body = { data: result[0], code: 1 };
+        const resType = await app.mysql.select('comment', {
+          where: {
+            blogId: id,
+            isSelected: 1,
+          },
+        });
+        ctx.body = { data: { blog: result[0], comment: resType }, code: 1 };
       }
     } else {
       ctx.body = {
@@ -91,6 +96,7 @@ export default class ArticleController extends Controller {
     const sql = `SELECT article.id as id,
                  article.title as title,
                  article.introduce as introduce,
+                 article.state as state,
                  FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime,
                  DATE_FORMAT(article.update_time,'%Y-%m-%d %H:%i:%s' ) as update_time,
                  article.view_count as view_count,
@@ -162,39 +168,29 @@ export default class ArticleController extends Controller {
         message: '上传失败',
       };
     }
-    // const stream = await this.ctx.getFileStream()
-    // console.log('this.ctx.request', stream);
-
-    // var file = stream;
-    // var name = stream.fieldname;
-    // var dist = 'app/public/upload/' + name;
-    // let result = await new Promise((resolve, reject) => {
-    //   fs.copyFile(file, dist, (error) => {
-    //     if (error) {
-    //       reject(error);
-    //       console.log("fail");
-    //     } else {
-    //       resolve(true);
-    //       console.log("success");
-    //     }
-    //   });
-    // });
-    // console.log(result)
-    // this.ctx.body = {
-    //   errMsg: '添加失败，分类id不正确',
-    //   code: -1,
-    // };
   }
 
   // 修改文章
   public async updateArticle() {
     const { ctx, app } = this;
-    console.log('timetime', ctx.formatTime());
     const tmpArticle = { ...ctx.request.body, update_time: ctx.formatTime() };
     console.log(tmpArticle);
     ctx.updateOrderNum(app, tmpArticle);
     const result = await app.mysql.update('article', tmpArticle);
     ctx.body = ctx.handleData(result);
+  }
+
+  // 修改文章置顶信息
+  public async updateState() {
+    const { ctx, app } = this;
+    const tmpArticle = ctx.request.body;
+    const sql =
+      'update  article set state = ' +
+      tmpArticle.state +
+      ' where id = ' +
+      tmpArticle.id;
+    const updateResult = await app.mysql.query(sql);
+    ctx.body = ctx.handleData(updateResult);
   }
 
   // 修改文章置顶信息

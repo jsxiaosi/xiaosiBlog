@@ -20,6 +20,14 @@
           @change="(e: number) => switchChange(e, slotData.row)"
         />
       </template>
+      <template #state="slotData">
+        <el-switch
+          v-model="slotData.row.state"
+          :active-value="1"
+          :inactive-value="0"
+          @change="(e: number) => switchStateChange(e, slotData.row)"
+        />
+      </template>
       <template #operate="slotData">
         <div>
           <el-button @click="updateAft(slotData.row.id)">修改</el-button>
@@ -37,7 +45,12 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { articleListApi, delArticleApi, updateArticleIsTopApi } from '@/api/blog';
+  import {
+    articleListApi,
+    delArticleApi,
+    updateArticleIsTopApi,
+    updateArticleStateApi,
+  } from '@/api/blog';
   import { BlogModel } from '@/api/blog/blogModel';
   // import Form from '@/components/Form/index.vue';
   // import { FormProps } from '@/components/Form/types/from';
@@ -48,56 +61,6 @@
   // import { h } from 'vue';
 
   const router = useRouter();
-
-  // const formOption = reactive<FormProps>({
-  //   labelPosition: 'right',
-  //   formItem: [
-  //     {
-  //       gutter: 30,
-  //       xl: 6,
-  //       lg: 6,
-  //       itemList: [
-  //         {
-  //           component: 'ElInput',
-  //           label: '标题',
-  //           prop: 'name',
-  //           props: {
-  //             onChange: (e: any) => {
-  //               console.log(e);
-  //             },
-  //           },
-  //         },
-  //         {
-  //           component: 'ElSelect',
-  //           label: '类别',
-  //           prop: 'select',
-  //           childrenComponent: {
-  //             options: [
-  //               { label: '吃吃吃就知道吃', value: '吃吃吃就知道吃' },
-  //               { label: '饿着吧！饿死算了', value: '饿着吧！饿死算了' },
-  //             ],
-  //           },
-  //         },
-  //         {
-  //           component: 'ElDatePicker',
-  //           label: '创建时间',
-  //           prop: 'dateTime',
-  //           props: {
-  //             type: 'datetimerange',
-  //             rangeSeparator: 'To',
-  //             startPlaceholder: 'Start date',
-  //             endPlaceholder: 'End date',
-  //           },
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // });
-
-  // const submitForm = (value: object) => {
-  //   // form.value = { ...value, ...form.value };
-  //   console.log(value);
-  // };
 
   const option = [
     {
@@ -128,6 +91,11 @@
     {
       label: '置顶',
       prop: 'isTop',
+      isSlots: true,
+    },
+    {
+      label: '隐藏文章',
+      prop: 'state',
       isSlots: true,
     },
     {
@@ -182,6 +150,13 @@
 
   const addAft = () => {
     router.push('/blog/addArticle?type=article');
+  };
+
+  const switchStateChange = async (_e: number, row: BlogModel) => {
+    if (row.id) {
+      const res = await updateArticleStateApi(row);
+      if (res) getArticleList();
+    }
   };
 
   const switchChange = async (e: number, row: BlogModel) => {

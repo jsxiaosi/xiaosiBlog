@@ -14,7 +14,7 @@ const { data } = await useFetch<{
 }>(`${config.baseURL}/api/blog/article_info`, { params: { id: 76 } })
 
 if (data)
-  html.value = marked(data.value.data.article_content)
+  html.value = marked(data.value.data.blog.article_content)
 </script>
 
 <template>

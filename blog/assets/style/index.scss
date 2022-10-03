@@ -27,7 +27,7 @@ button {
   border: 1px solid var(--border-color);
   background-color: transparent;
   box-sizing: border-box;
-  outline-color: var(--text-color2);
+  outline: none;
   color: var(--text-color);
 }
 

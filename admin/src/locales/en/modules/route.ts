@@ -5,6 +5,8 @@ const route = {
     blog_addArticle: 'AddArticle',
     blog_blogTable: 'Article List',
     blog_briefArticle: 'Brief Article List',
+    comment: 'Comments/Comments',
+    commentList: 'Comments/Comments List',
     type: 'Type',
     typeList: 'Type List',
   },

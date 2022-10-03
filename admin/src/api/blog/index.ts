@@ -8,6 +8,7 @@ enum Api {
   ADD_ARTICLE = '/article/add',
   UPDATE_ARTICLE = '/article/update',
   UPDATE_ARTICLE_IS_TOP = '/article/update_top',
+  UPDATE_ARTICLE_STATE = '/article/update_state',
   DELARTICLE = '/article/delete',
   UPLOAD = '/article/upload',
 }
@@ -33,6 +34,9 @@ export const uploadApi = (data: FormData) =>
 
 export const updateArticleIsTopApi = (data: BlogModel) =>
   deffHttp.post<DataType>({ url: Api.UPDATE_ARTICLE_IS_TOP, data });
+
+export const updateArticleStateApi = (data: BlogModel) =>
+  deffHttp.post<DataType>({ url: Api.UPDATE_ARTICLE_STATE, data });
 
 export const delArticleApi = (data: { id: number }) =>
   deffHttp.delete<DataType>({ url: Api.DELARTICLE, data });

@@ -53,6 +53,22 @@ const safeManagerRoutes: Array<AppRouteRecordRaw> = [
     ],
   },
   {
+    path: '/comment',
+    component: Layout,
+    redirect: '/comment/list',
+    name: 'comment',
+    alwaysShow: true,
+    meta: { title: t('route.pathName.comment'), icon: 'components' },
+    children: [
+      {
+        path: 'list',
+        name: 'RfCommentList',
+        component: () => import('@/views/comment/list/index.vue'),
+        meta: { title: t('route.pathName.commentList'), keepAlive: true },
+      },
+    ],
+  },
+  {
     path: '/type',
     component: Layout,
     redirect: '/type/typeList',

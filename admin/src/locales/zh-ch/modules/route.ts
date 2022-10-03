@@ -5,6 +5,8 @@ const route = {
     blog_addArticle: '添加文章',
     blog_blogTable: '文章列表',
     blog_briefArticle: '暂存文章列表',
+    comment: '评论/留言',
+    commentList: '评论/留言列表',
     type: '分类',
     typeList: '分类列表',
   },
