@@ -61,10 +61,16 @@ export default class AdminController extends Controller {
     };
   }
 
+  public async updateUserInfo() {
+    const { ctx, app } = this;
+    const result = await app.mysql.update('admin_user', ctx.request.body);
+    ctx.body = ctx.handleData(result);
+  }
+
   public async getUserInfo() {
     const { ctx, app } = this;
     const { id } = ctx.query;
-    const sql = `SELECT email, qq, github, githubName, location, name, autograph
+    const sql = `SELECT id, email, qq, github, githubName, location, name, autograph, avatar, wechat, describeText 
                   FROM admin_user
                   WHERE  id = ${id}`;
     const userInfo = await app.mysql.query(sql);

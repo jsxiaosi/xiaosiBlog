@@ -3,12 +3,11 @@ import { reactive } from 'vue'
 import timeFrom from '@/utils/timeFrom'
 import { useDemoLeftBox } from '@/hook/close'
 import type { CommentModel } from '~~/types/blog'
+import { useUserInfoStore } from '@/store/userInfo'
 
-definePageMeta({
-  layout: 'default',
-})
+const { closeLeftBox, showLeftBox } = useDemoLeftBox()
 
-const { closeLeftBox } = useDemoLeftBox()
+const { userData } = useUserInfoStore()
 
 const config = useRuntimeConfig()
 
@@ -113,6 +112,7 @@ const blurChage = (e, input_type: string) => {
 
 <template>
   <div class="blog_content">
+    <img class="head_image" :src="userData.avatar" @click="showLeftBox">
     <Message
       v-model:visible="showTost"
       :type="messageInfo.type"
@@ -221,10 +221,10 @@ const blurChage = (e, input_type: string) => {
               :key="item.id"
               class="flex-x comments_item"
             >
-              <img src="@/assets/image/logo.png">
+              <i class="icon iconfont icon-touxiang" />
               <div class="comments_item_use">
                 <div class="flex-y comments_item_use_info">
-                  <span class="name">{{ item.nickname }}</span>
+                  <span class="name">匿名网友</span>
                   <span class="time">{{ timeFrom(item.dateTime, false) }}</span>
                 </div>
                 <div class="comments_item_content">
@@ -380,10 +380,11 @@ const blurChage = (e, input_type: string) => {
   .comments_item {
     margin-bottom: var(--margin);
 
-    img {
+    .icon {
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      font-size: 50px;
+      // width: 50px;
+      // height: 50px;
     }
 
     .comments_item_use {
@@ -408,6 +409,26 @@ const blurChage = (e, input_type: string) => {
     .comments_item_content {
       padding: var(--padding-sm) 0;
       border-bottom: 1px solid var(--border-color);
+    }
+  }
+}
+
+@media (max-width: 920px) {
+  .comments {
+    .user_info {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      .item {
+        width: 100%;
+        .title {
+          width: 90px;
+          text-align: right;
+        }
+      }
+      .item:nth-child(2) {
+        margin-top: var(--margin-sm);
+      }
     }
   }
 }

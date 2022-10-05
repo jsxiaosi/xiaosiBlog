@@ -164,23 +164,25 @@ importers:
     specifiers:
       "@antfu/eslint-config": ^0.27.0
       "@nuxt/kit": ^3.0.0-rc.11
+      "@pinia/nuxt": ^0.4.2
       "@vueuse/core": ^9.3.0
       "@vueuse/nuxt": ^9.3.0
       highlight.js: ^11.6.0
       lodash: ^4.17.21
       marked: ^4.1.0
       nuxt: ^3.0.0-rc.11
-      particles.js: ^2.0.0
+      pinia: ^2.0.22
       sass: ^1.55.0
       typescript: ^4.8.3
       vue: ^3.2.39
     dependencies:
       "@antfu/eslint-config": 0.27.0_typescript@4.8.4
       "@nuxt/kit": 3.0.0-rc.11
+      "@pinia/nuxt": 0.4.2_bfjwoga25wxjazzogo7o372nwq
       highlight.js: 11.6.0
       lodash: 4.17.21
       marked: 4.1.0
-      particles.js: 2.0.0
+      pinia: 2.0.22_bfjwoga25wxjazzogo7o372nwq
     devDependencies:
       "@vueuse/core": 9.3.0_vue@3.2.40
       "@vueuse/nuxt": 9.3.0_jzuo2keo4fo3uqanfnsu3akrmm
@@ -1693,6 +1695,21 @@ packages:
       - vls
       - vti
     dev: true
+
+  /@pinia/nuxt/0.4.2_bfjwoga25wxjazzogo7o372nwq:
+    resolution:
+      {
+        integrity: sha512-yPrJVFOTVDsCcwzVvElLmSFB6IKWo+0WpVmVPCZyj/LD2uNYBK8I3lTPHdZ4q/VS2Sj8LkA7aq6S8PFpwguQ0A==,
+      }
+    dependencies:
+      "@nuxt/kit": 3.0.0-rc.11
+      pinia: 2.0.22_bfjwoga25wxjazzogo7o372nwq
+    transitivePeerDependencies:
+      - "@vue/composition-api"
+      - supports-color
+      - typescript
+      - vue
+    dev: false
 
   /@rollup/plugin-alias/3.1.9_rollup@2.79.1:
     resolution:
@@ -14863,13 +14880,6 @@ packages:
         integrity: sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==,
       }
     engines: { node: ">= 0.8" }
-
-  /particles.js/2.0.0:
-    resolution:
-      {
-        integrity: sha512-8e0JIqkRbMMPlFBnF9f+92hX1s07jdkd3tqB8uHE9L+cwGGjIYjQM7QLgt0FQ5MZp6SFFYYDm/Y48pqK3ZvJOQ==,
-      }
-    dev: false
 
   /pascal-case/2.0.1:
     resolution:

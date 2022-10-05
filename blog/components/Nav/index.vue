@@ -2,21 +2,19 @@
 const color = useColorMode()
 const thmeIconClass = computed(() => {
   if (color.value === 'dark')
-    return 'iconfont icon-yejianmoshi'
-  else return 'iconfont icon-baitian-qing'
+    return 'iconfont icon-baitianmoshi'
+  else return 'iconfont icon-yejianmoshi'
 })
 function toggleDark() {
   color.value = color.value === 'dark' ? 'light' : 'dark'
-}
-
-function toGithub() {
-  window.open('https://github.com/jsxiaosi/')
 }
 </script>
 
 <template>
   <div class="flex-x nav">
-    <div />
+    <NuxtLink to="/">
+      <span class="blog_title">小斯的博客</span>
+    </NuxtLink>
 
     <div class="rigth">
       <NuxtLink to="/blog">
@@ -25,7 +23,7 @@ function toGithub() {
       <NuxtLink to="/">
         项目
       </NuxtLink>
-      <NuxtLink to="https://github.com/jsxiaosi/">
+      <NuxtLink to="https://github.com/jsxiaosi/" target="_blank">
         <i class="iconfont icon-github" />
       </NuxtLink>
       <div class="pointer" @click="toggleDark">

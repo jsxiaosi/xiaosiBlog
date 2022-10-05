@@ -57,7 +57,7 @@ const safeManagerRoutes: Array<AppRouteRecordRaw> = [
     component: Layout,
     redirect: '/comment/list',
     name: 'comment',
-    alwaysShow: true,
+    alwaysShow: false,
     meta: { title: t('route.pathName.comment'), icon: 'components' },
     children: [
       {
@@ -73,7 +73,7 @@ const safeManagerRoutes: Array<AppRouteRecordRaw> = [
     component: Layout,
     redirect: '/type/typeList',
     name: 'type',
-    alwaysShow: true,
+    alwaysShow: false,
     meta: { title: t('route.pathName.type'), icon: 'components' },
     children: [
       {

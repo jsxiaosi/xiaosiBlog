@@ -1,21 +1,11 @@
 <script setup lang="ts">
 import { useDemoLeftBox } from '@/hook/close'
 import timeFrom from '@/utils/timeFrom'
+import { useUserInfoStore } from '@/store/userInfo'
 
-definePageMeta({
-  layout: 'default',
-})
+const { userData } = useUserInfoStore()
 
-const { closeLeftBox } = useDemoLeftBox()
-interface AccountType {
-  name: string
-  autograph: string
-  qq: string
-  email: string
-  github: string
-  githubName: string
-  location: string
-}
+const { closeLeftBox, showLeftBox } = useDemoLeftBox()
 
 const route = useRoute()
 const config = useRuntimeConfig()
@@ -26,15 +16,6 @@ if (!isNaN(Number(route.params.id)))
 
 const reslist = ref([])
 const typeList = ref([])
-const account = ref<AccountType>({
-  name: '',
-  autograph: '',
-  qq: '',
-  email: '',
-  github: '',
-  githubName: '',
-  location: '',
-})
 
 const getBlogList = async () => {
   const { data } = await useFetch<{
@@ -53,30 +34,19 @@ const getBlogList = async () => {
 }
 
 getBlogList()
-
-const getUserInfo = async () => {
-  const { data } = await useFetch<{
-    userInfo: AccountType
-  }>(`${config.baseURL}/api/blog/userInfo`, { params: { id: '1' } })
-  if (data.value) {
-    const { userInfo } = data.value
-    account.value = userInfo
-  }
-}
-
-getUserInfo()
 </script>
 
 <template>
   <div class="blog_content">
+    <img class="head_image" :src="userData.avatar" @click="showLeftBox">
     <div class="left-box">
       <div class="close" @click="closeLeftBox">
         X
       </div>
       <div class="container flex-y-center" style="padding-top: 0">
-        <img class="image" src="@/assets/image/logo.png">
-        <span class="name">{{ account.name }}</span>
-        <span class="position">{{ account.autograph }}</span>
+        <img class="image" :src="userData.avatar">
+        <span class="name">{{ userData.name }}</span>
+        <span class="position">{{ userData.autograph }}</span>
       </div>
       <div class="container">
         <span class="title">文章分类：</span>
@@ -184,6 +154,20 @@ hr {
 
   .full-text {
     color: var(--color-primary);
+  }
+}
+
+@media (max-width: 920px) {
+  .cart {
+    padding: var(--padding-sm) 0;
+    .info {
+      span {
+        flex: 1;
+      }
+    }
+  }
+  hr {
+    margin: 0;
   }
 }
 </style>

@@ -49,9 +49,6 @@
 </template>
 <script lang="ts" setup>
   import { computed, onMounted, reactive, ref } from 'vue';
-  import { marked } from 'marked';
-  import hljs from 'highlight.js';
-  import 'highlight.js/styles/monokai-sublime.css';
   import { typeListApi } from '@/api/typeInfo';
   import { addArticleApi, articleInfoApi, updateArticleApi, uploadApi } from '@/api/blog';
   import {
@@ -66,6 +63,7 @@
   import { TypeInfoModel } from '@/api/typeInfo/typeInfoModel';
   import { beforeAvatarUpload } from '@/utils/file';
   import { httpsUrl } from '@/utils/axios';
+  import { useMarked } from '@/hooks/useMarked';
 
   const route = useRoute();
   const router = useRouter();
@@ -75,6 +73,8 @@
 
   const { createErrorMsg } = useMessage();
 
+  const { marked } = useMarked();
+
   onMounted(async () => {
     if (articleId) {
       const res =
@@ -83,24 +83,6 @@
           : await articleInfoApi({ id: Number(articleId) });
       if (res) blogData.info = res;
     }
-  });
-
-  const renderer = new marked.Renderer();
-  renderer.heading = function (text, level) {
-    return `<a class="anchor-fix"><h${level}>${text}</h${level}></a>\n`;
-  };
-
-  marked.setOptions({
-    renderer,
-    gfm: true,
-    pedantic: false,
-    sanitize: false,
-    breaks: true,
-    smartLists: true,
-    smartypants: false,
-    highlight(code) {
-      return hljs.highlightAuto(code).value;
-    },
   });
 
   const html = computed(() => marked(blogData.info.article_content as string));
@@ -185,9 +167,10 @@
     console.log(file);
     const fileType = file.type.split('/')[1];
     let newFile = new File([file], `${info.title || ''}${new Date().getTime()}.${fileType}`, file);
-    const url = encodeURI(`${httpsUrl}/image/${newFile.name}`);
+    const newFileName = `blog_${newFile.name}`;
+    const url = encodeURI(`${httpsUrl}/image/${newFileName}`);
     console.log(`<img src="${url}}" style="width:100%">`);
-    const fileData = new File([await beforeAvatarUpload(newFile)], newFile.name, {
+    const fileData = new File([await beforeAvatarUpload(newFile)], newFileName, {
       type: newFile.type,
       lastModified: Date.now(),
     });

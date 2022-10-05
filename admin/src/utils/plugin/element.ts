@@ -35,6 +35,7 @@ import {
   ElTableColumn,
   ElDialog,
   ElPagination,
+  ElUpload,
   // 指令
   ElLoading,
   ElInfiniteScroll,
@@ -81,13 +82,14 @@ const components = [
   ElDialog,
   ElSwitch,
   ElPagination,
+  ElUpload,
 ];
 
 // https://element-plus.org/zh-CN/component/icon.html
-import { HomeFilled, Avatar, Operation, Grid, Setting } from '@element-plus/icons-vue';
+import { HomeFilled, Avatar, Operation, Grid, Setting, Plus } from '@element-plus/icons-vue';
 
 // Icon
-export const iconComponents = [HomeFilled, Avatar, Operation, Grid, Setting];
+export const iconComponents = [HomeFilled, Avatar, Operation, Grid, Setting, Plus];
 
 export function useElementPlus(app: App) {
   // 注册组件

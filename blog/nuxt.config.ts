@@ -3,6 +3,7 @@ import { defineNuxtConfig } from 'nuxt/config'
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
   ssr: true,
+  modules: ['@pinia/nuxt', '@vueuse/nuxt'],
   meta: {
     title: '小斯博客',
     link: [
@@ -29,7 +30,6 @@ export default defineNuxtConfig({
     extractCSS: true,
   },
   css: ['@/assets/iconfont/iconfont.css', '@/assets/style/index.scss'],
-  buildModules: ['@vueuse/nuxt'],
   vueuse: {
     ssrHandlers: true,
   },

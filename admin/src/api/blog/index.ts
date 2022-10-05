@@ -26,7 +26,7 @@ export const updateArticleApi = (data: BlogModel) =>
   deffHttp.post<DataType>({ url: Api.UPDATE_ARTICLE, data });
 
 export const uploadApi = (data: FormData) =>
-  deffHttp.post<DataType>({
+  deffHttp.post<{ fileName: string }>({
     url: Api.UPLOAD,
     data,
     headers: { 'content-type': ' multipart/form-data' },

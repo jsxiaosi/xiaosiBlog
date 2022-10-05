@@ -158,9 +158,7 @@ export default class ArticleController extends Controller {
     const data = await ctx.service.upload.index();
     if (data) {
       ctx.body = {
-        data: {
-          fileName: data,
-        },
+        data,
         code: 1,
       };
     } else {

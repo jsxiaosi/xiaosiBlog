@@ -1,25 +1,19 @@
 <script setup lang="ts">
+import { useUserInfoStore } from '@/store/userInfo'
+
 definePageMeta({
   layout: 'default',
 })
 
-const config = useRuntimeConfig()
-
 const { marked } = useMarked()
+const { userData } = useUserInfoStore()
 
-const html = ref<string>('')
-
-const { data } = await useFetch<{
-  data: any
-}>(`${config.baseURL}/api/blog/article_info`, { params: { id: 76 } })
-
-if (data)
-  html.value = marked(data.value.data.blog.article_content)
+const html = ref<string>(marked(userData.describeText))
 </script>
 
 <template>
   <div id="particles-js" class="flex-y home">
-    <img class="artificial" src="@/assets/image/logo.png">
+    <img class="avatar" :src="userData.avatar">
     <div class="md-text markdown" v-html="html" />
   </div>
 </template>
@@ -30,7 +24,7 @@ if (data)
   height: 100%;
   margin: auto;
 
-  .artificial {
+  .avatar {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -39,6 +33,14 @@ if (data)
   .md-text {
     margin-top: var(--margin);
     font-size: var(--font-size-lg);
+  }
+}
+@media (max-width: 920px) {
+  .home {
+    .avatar {
+      width: 80px;
+      height: 80px;
+    }
   }
 }
 </style>

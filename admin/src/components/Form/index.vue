@@ -24,22 +24,26 @@
           </FormItem>
         </el-col>
       </el-row>
-      <!-- <el-form-item>
+      <el-form-item>
         <el-button type="primary" @click="submitForm()">Create</el-button>
         <el-button @click="resetForm()">Reset</el-button>
-      </el-form-item> -->
+      </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, reactive, PropType, ref } from 'vue';
+  import { onMounted, reactive, PropType, ref, watchEffect } from 'vue';
   import { FormProps, FormItemListProps } from './types/from';
   import FormItem from './src/components/FormItem.vue';
 
-  defineProps({
+  const props = defineProps({
     formOption: {
       type: Object as PropType<FormProps>,
+      default: () => {},
+    },
+    formValue: {
+      type: Object,
       default: () => {},
     },
     rules: {
@@ -51,7 +55,16 @@
   const emit = defineEmits<{
     (e: 'submitForm', form: FormItemListProps): void;
   }>();
-  const form = reactive<any>({ name: '' });
+  const form = reactive<any>(props.formValue || {});
+
+  watchEffect(() => {
+    if (props.formValue) {
+      console.log('props.formValue', props.formValue);
+      Object.keys(props.formValue).forEach((i) => {
+        form[i] = props.formValue[i];
+      });
+    }
+  });
 
   const formRef = ref();
 

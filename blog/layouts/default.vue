@@ -129,7 +129,7 @@ onMounted(() => {
               color: #939393;
             "
           >
-            粤ICP备***
+            ICP备案内容区域
           </p>
         </a>
       </div>
@@ -145,6 +145,7 @@ onMounted(() => {
   height: 100vh;
   z-index: -1;
 }
+
 ._blank {
   width: 100%;
   height: 40px;
@@ -152,7 +153,7 @@ onMounted(() => {
   justify-content: center;
 
   .item {
-    width: 300px;
+    // width: 300px;
     align-items: center;
   }
 }
