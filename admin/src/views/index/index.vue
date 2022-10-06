@@ -170,7 +170,7 @@
     </Form>
   </div>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
   .page-container {
     height: auto;
   }
