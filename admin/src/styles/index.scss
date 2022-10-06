@@ -79,6 +79,18 @@ div:focus {
   border-radius: 10px;
   background-color: #{$main-bg-color};
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .add {
+    width: 100px;
+    align-self: flex-end;
+  }
+  .table {
+    flex: 1;
+    overflow-y: auto;
+    margin: 20px 0;
+  }
 }
 
 ul {

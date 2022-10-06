@@ -117,7 +117,7 @@ getBlogList()
 }
 
 .cart:hover {
-  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--box-shadow);
 }
 
 hr {

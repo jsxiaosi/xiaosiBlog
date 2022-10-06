@@ -147,14 +147,6 @@
 </template>
 <style lang="scss" scoped>
   .page-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    .table {
-      flex: 1;
-      overflow-y: auto;
-      margin: 20px 0;
-    }
     .pagination {
       align-self: flex-end;
     }

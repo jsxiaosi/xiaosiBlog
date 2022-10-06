@@ -1,55 +1,3 @@
-<template>
-  <div class="page-container">
-    <div class="container mx-auto">
-      <img src="@/assets/login/bg.png" class="wave" />
-      <div class="img -enter-x">
-        <img src="@/assets/login/illustration.svg" />
-      </div>
-
-      <div class="application">
-        <AppLocale class="item icon-size enter-x"></AppLocale>
-        <AppTheme class="item enter-x"></AppTheme>
-      </div>
-      <div class="login-box">
-        <div class="login-form">
-          <h2 class="enter-x p-4">SuperCuteXiaoSi</h2>
-          <div class="input-group user enter-x">
-            <SvgIcon class-name="icon" name="iEL-avatar"></SvgIcon>
-            <div>
-              <h5>{{ t('sys.login.userName') }}</h5>
-              <input
-                v-model="user"
-                type="text"
-                class="input"
-                @focus="onUserFocus"
-                @blur="onUserBlur"
-              />
-            </div>
-          </div>
-          <div class="input-group pwd enter-x">
-            <SvgIcon class-name="icon" name="password"></SvgIcon>
-
-            <div>
-              <h5>{{ t('sys.login.password') }}</h5>
-              <input
-                v-model="pwd"
-                type="password"
-                class="input"
-                autocomplete="on"
-                @focus="onPwdFocus"
-                @blur="onPwdBlur"
-              />
-            </div>
-          </div>
-          <button class="btn enter-x" @click="onLogin">
-            {{ t('sys.login.loginButton') }}
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
   import SvgIcon from '@/components/SvgIcon/index.vue';
   import { AppLocale, AppTheme } from '@/components/Application';
@@ -117,6 +65,58 @@
     if (pwd.value.length === 0) removeClass(document.querySelector('.pwd'), 'focus');
   }
 </script>
+
+<template>
+  <div class="page-container">
+    <div class="container mx-auto">
+      <img src="@/assets/login/bg.png" class="wave" />
+      <div class="img -enter-x">
+        <img src="@/assets/login/illustration.svg" />
+      </div>
+
+      <div class="application">
+        <AppLocale class="item icon-size enter-x"></AppLocale>
+        <AppTheme class="item enter-x"></AppTheme>
+      </div>
+      <div class="login-box">
+        <div class="login-form">
+          <h2 class="enter-x p-4">SuperCuteXiaoSi</h2>
+          <div class="input-group user enter-x">
+            <SvgIcon class-name="icon" name="iEL-avatar"></SvgIcon>
+            <div>
+              <h5>{{ t('sys.login.userName') }}</h5>
+              <input
+                v-model="user"
+                type="text"
+                class="input"
+                @focus="onUserFocus"
+                @blur="onUserBlur"
+              />
+            </div>
+          </div>
+          <div class="input-group pwd enter-x">
+            <SvgIcon class-name="icon" name="password"></SvgIcon>
+
+            <div>
+              <h5>{{ t('sys.login.password') }}</h5>
+              <input
+                v-model="pwd"
+                type="password"
+                class="input"
+                autocomplete="on"
+                @focus="onPwdFocus"
+                @blur="onPwdBlur"
+              />
+            </div>
+          </div>
+          <button class="btn enter-x" @click="onLogin">
+            {{ t('sys.login.loginButton') }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style lang="scss" scoped>
   .page-container {

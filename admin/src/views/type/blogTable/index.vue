@@ -87,8 +87,8 @@
 </script>
 <template>
   <div class="page-container">
-    <el-button @click="addDialog()">新建分类</el-button>
-    <Table :attribute="attribute" :option="option">
+    <el-button class="add" @click="addDialog()">新建分类</el-button>
+    <Table class="table" :attribute="attribute" :option="option">
       <template #operate="slotData">
         <div>
           <el-button @click="updateDialog(slotData.row)">修改</el-button>

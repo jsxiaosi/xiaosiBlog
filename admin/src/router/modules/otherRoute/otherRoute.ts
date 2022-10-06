@@ -69,6 +69,22 @@ const safeManagerRoutes: Array<AppRouteRecordRaw> = [
     ],
   },
   {
+    path: '/project',
+    component: Layout,
+    redirect: '/project/project_list',
+    name: 'project',
+    alwaysShow: false,
+    meta: { title: t('route.pathName.project'), icon: 'components' },
+    children: [
+      {
+        path: 'project_list',
+        name: 'RfProjectList',
+        component: () => import('@/views/project/list/index.vue'),
+        meta: { title: t('route.pathName.projectList'), keepAlive: true },
+      },
+    ],
+  },
+  {
     path: '/type',
     component: Layout,
     redirect: '/type/blog_type',

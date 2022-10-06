@@ -1,26 +1,3 @@
-<template>
-  <div class="page-container">
-    <Form ref="formRef" :form-option="formOption" :form-value="from" @submit-form="submitForm">
-      <template #avatar>
-        <el-upload
-          class="avatar-uploader"
-          :show-file-list="false"
-          :on-change="handleUpload"
-          :auto-upload="false"
-        >
-          <img v-if="from.avatar" :src="from.avatar" class="avatar" />
-          <el-icon v-else class="avatar-uploader-icon"><iEL-plus /></el-icon>
-        </el-upload>
-      </template>
-      <template #describe>
-        <div class="blog">
-          <el-input v-model="describe" class="input" type="textarea"></el-input>
-          <div class="marked" :innerHTML="html"></div>
-        </div>
-      </template>
-    </Form>
-  </div>
-</template>
 <script setup lang="ts">
   import { computed, onMounted, reactive, ref } from 'vue';
   import { useMarked } from '@/hooks/useMarked';
@@ -170,6 +147,29 @@
     getUserInfo();
   });
 </script>
+<template>
+  <div class="page-container">
+    <Form ref="formRef" :form-option="formOption" :form-value="from" @submit-form="submitForm">
+      <template #avatar>
+        <el-upload
+          class="avatar-uploader"
+          :show-file-list="false"
+          :on-change="handleUpload"
+          :auto-upload="false"
+        >
+          <img v-if="from.avatar" :src="from.avatar" class="avatar" />
+          <el-icon v-else class="avatar-uploader-icon"><iEL-plus /></el-icon>
+        </el-upload>
+      </template>
+      <template #describe>
+        <div class="blog">
+          <el-input v-model="describe" class="input" type="textarea"></el-input>
+          <div class="marked" :innerHTML="html"></div>
+        </div>
+      </template>
+    </Form>
+  </div>
+</template>
 <style lang="scss">
   .avatar-uploader {
     margin-bottom: 20px;

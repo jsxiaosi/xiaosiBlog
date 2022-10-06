@@ -10,6 +10,8 @@ const route = {
     type: '分类管理',
     blogType: '文章分类',
     projectType: '项目分类',
+    project: '项目管理',
+    projectList: '项目列表',
   },
   log: {
     importError: '文件没有默认导出',

@@ -38,15 +38,20 @@ if (data) {
 }
 
 // 评论留言
-const nicknameCheck = ref<boolean>(false)
-const contentCheck = ref<boolean>(false)
-const contactCheck = ref<boolean>(false)
 
-const commentInfo = reactive<Partial<CommentModel>>({
-  nickname: '',
-  content: '',
-  contact: '',
-  blogId: id,
+const comInfo = reactive({
+  nickname: {
+    value: '',
+    check: false,
+  },
+  contact: {
+    value: '',
+    check: false,
+  },
+  content: {
+    value: '',
+    check: false,
+  },
 })
 
 const showTost = ref<boolean>(false)
@@ -59,55 +64,49 @@ const publishChange = async () => {
   if (loading.value)
     return
 
-  const { nickname, contact, content } = commentInfo
-  if (!nickname)
-    nicknameCheck.value = true
-  if (!contact)
-    contactCheck.value = true
-  if (!content)
-    contentCheck.value = true
-
-  if (nickname && contact && content) {
-    loading.value = true
-
-    const { data } = await useFetch<{
-      data: any
-      code: number
-    }>(`${config.baseURL}/api/comment/add_comment`, {
-      method: 'POST',
-      body: commentInfo,
-      key: `${new Date().getTime()}`,
-    })
-    if (data.value.code) {
-      showTost.value = true
-      messageInfo.text = '留言成功~！'
-      messageInfo.type = 'success'
-      commentInfo.nickname = ''
-      commentInfo.content = ''
-      commentInfo.contact = ''
-    }
-    else {
-      messageInfo.text = '哎呀呀~！出错了'
-      messageInfo.type = 'error'
-    }
-    loading.value = false
+  const findInfo = Object.keys(comInfo).find(i => !comInfo[i].value)
+  if (findInfo) {
+    comInfo[findInfo].check = true
+    return
   }
+
+  loading.value = true
+
+  const params: CommentModel = {} as CommentModel
+
+  Object.keys(comInfo).forEach((i) => {
+    params[i] = comInfo[i].value
+  })
+
+  params.blogId = id
+
+  const { data } = await useFetch<{
+    data: any
+    code: number
+  }>(`${config.baseURL}/api/comment/add_comment`, {
+    method: 'POST',
+    body: params,
+    key: `${new Date().getTime()}`,
+  })
+  if (data.value.code) {
+    showTost.value = true
+    messageInfo.text = '留言成功~！'
+    messageInfo.type = 'success'
+    Object.keys(comInfo).forEach((i) => {
+      comInfo[i].value = ''
+      comInfo[i].check = false
+    })
+  }
+  else {
+    messageInfo.text = '哎呀呀~！出错了'
+    messageInfo.type = 'error'
+  }
+  loading.value = false
 }
 
 const blurChage = (e, input_type: string) => {
-  if (e.target.value) {
-    switch (input_type) {
-      case 'nicknameCheck':
-        nicknameCheck.value = false
-        break
-      case 'contentCheck':
-        contentCheck.value = false
-        break
-      case 'contactCheck':
-        contactCheck.value = false
-        break
-    }
-  }
+  if (e.target.value)
+    comInfo[input_type].check = false
 }
 </script>
 
@@ -175,36 +174,36 @@ const blurChage = (e, input_type: string) => {
               <span class="title"><i>*</i>昵称：</span>
               <div class="flex-y entry">
                 <input
-                  v-model="commentInfo.nickname"
-                  :class="{ error_border: nicknameCheck }"
+                  v-model="comInfo.nickname.value"
+                  :class="{ error_border: comInfo.nickname.check }"
                   placeholder="请输入昵称"
-                  @blur="(e) => blurChage(e, 'nicknameCheck')"
+                  @blur="(e) => blurChage(e, 'nickname')"
                 >
-                <span v-show="nicknameCheck" class="check_text">内容不可为空</span>
+                <span v-show="comInfo.nickname.check" class="check_text">内容不可为空</span>
               </div>
             </div>
             <div class="flex-x item">
               <span class="title"><i>*</i>联系方式：</span>
               <div class="flex-y entry">
                 <input
-                  v-model="commentInfo.contact"
-                  :class="{ error_border: contactCheck }"
+                  v-model="comInfo.contact.value"
+                  :class="{ error_border: comInfo.contact.check }"
                   placeholder="请输入联系方式"
-                  @blur="(e) => blurChage(e, 'contactCheck')"
+                  @blur="(e) => blurChage(e, 'contact')"
                 >
-                <span v-show="contactCheck" class="check_text">内容不可为空</span>
+                <span v-show="comInfo.contact.check" class="check_text">内容不可为空</span>
               </div>
             </div>
           </div>
           <div class="flex-y entry content">
             <textarea
-              v-model="commentInfo.content"
-              :class="{ error_border: contentCheck }"
+              v-model="comInfo.content.value"
+              :class="{ error_border: comInfo.content.check }"
               placeholder="评论、留言内容"
               placeholder-class="textarea-placeholder"
-              @blur="(e) => blurChage(e, 'contentCheck')"
+              @blur="(e) => blurChage(e, 'content')"
             />
-            <span v-show="contentCheck" class="check_text">内容不可为空</span>
+            <span v-show="comInfo.content.check" class="check_text">内容不可为空</span>
           </div>
           <div class="publish">
             <button class="flex-x pointer" @click="publishChange">
@@ -258,7 +257,7 @@ const blurChage = (e, input_type: string) => {
   width: 100%;
   border: 1px solid var(--border-color);
   border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--box-shadow);
   padding: var(--padding);
   margin-bottom: var(--margin);
 }

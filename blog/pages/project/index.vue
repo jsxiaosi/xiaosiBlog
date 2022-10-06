@@ -1,65 +1,52 @@
 <script setup lang="ts">
-import { useUserInfoStore } from '@/store/userInfo'
-const { userData } = useUserInfoStore()
+import type { ProjectList, ProjectModel } from '~~/types/project'
+
+const config = useRuntimeConfig()
+
+const projectList = ref<ProjectList[]>([])
+
+const getBlogList = async () => {
+  const { data } = await useFetch<{
+    data: ProjectModel[]
+  }>(() => `${config.baseURL}/api/project/list`)
+  if (data.value) {
+    const list = data.value.data
+    const newList: ProjectList[] = []
+    list.forEach((item) => {
+      const index = newList.findIndex(i => i.sortId === item.sortId)
+      if (index === -1) {
+        newList.push({
+          sortId: item.sortId,
+          sortName: item.sortName,
+          child: [item],
+        })
+      }
+      else {
+        newList[index].child.push(item)
+      }
+    })
+    projectList.value = newList
+  }
+}
+
+getBlogList()
 </script>
 
 <template>
   <div class="project">
-    <h3>项目</h3>
-    <div class="content">
-      <div class="flex-y item pointer">
-        <span class="title">vue-xs-admin</span>
-        <span class="text">基于Vue3,Vite3,Element-Plus等主流技术开发的开箱即用后台模板</span>
-      </div>
-      <div class="flex-y item pointer">
-        <span class="title">vue-xs-admin</span>
-        <span class="text">基于Vue3,Vite3,Element-Plus等主流技术开发的开箱即用后台模板</span>
-      </div>
-      <div class="flex-y item pointer">
-        <span class="title">vue-xs-admin</span>
-        <span class="text">基于Vue3,Vite3,Element-Plus等主流技术开发的开箱即用后台模板</span>
-      </div>
-      <div class="flex-y item pointer">
-        <span class="title">vue-xs-admin</span>
-        <span class="text">基于Vue3,Vite3,Element-Plus等主流技术开发的开箱即用后台模板</span>
-      </div>
-    </div>
-    <h3>项目</h3>
-    <div class="content">
-      <div class="flex-y item pointer">
-        <span class="title">vue-xs-admin</span>
-        <span class="text">基于Vue3,Vite3,Element-Plus等主流技术开发的开箱即用后台模板</span>
-      </div>
-      <div class="flex-y item pointer">
-        <span class="title">vue-xs-admin</span>
-        <span class="text">基于Vue3,Vite3,Element-Plus等主流技术开发的开箱即用后台模板</span>
-      </div>
-      <div class="flex-y item pointer">
-        <span class="title">vue-xs-admin</span>
-        <span class="text">基于Vue3,Vite3,Element-Plus等主流技术开发的开箱即用后台模板</span>
-      </div>
-      <div class="flex-y item pointer">
-        <span class="title">vue-xs-admin</span>
-        <span class="text">基于Vue3,Vite3,Element-Plus等主流技术开发的开箱即用后台模板</span>
-      </div>
-    </div>
-    <h3>项目</h3>
-    <div class="content">
-      <div class="flex-y item pointer">
-        <span class="title">vue-xs-admin</span>
-        <span class="text">基于Vue3,Vite3,Element-Plus等主流技术开发的开箱即用后台模板</span>
-      </div>
-      <div class="flex-y item pointer">
-        <span class="title">vue-xs-admin</span>
-        <span class="text">基于Vue3,Vite3,Element-Plus等主流技术开发的开箱即用后台模板</span>
-      </div>
-      <div class="flex-y item pointer">
-        <span class="title">vue-xs-admin</span>
-        <span class="text">基于Vue3,Vite3,Element-Plus等主流技术开发的开箱即用后台模板</span>
-      </div>
-      <div class="flex-y item pointer">
-        <span class="title">vue-xs-admin</span>
-        <span class="text">基于Vue3,Vite3,Element-Plus等主流技术开发的开箱即用后台模板</span>
+    <div v-for="i in projectList" :key="i.sortId">
+      <h3>{{ i.sortName }}</h3>
+      <div class="content">
+        <NuxtLink
+          v-for="childItem in i.child"
+          :key="childItem.id"
+          :to="childItem.url"
+          target="_blank"
+          class="flex-y item pointer"
+        >
+          <span class="title">{{ childItem.title }}</span>
+          <span class="text">{{ childItem.introduce }}</span>
+        </NuxtLink>
       </div>
     </div>
   </div>
@@ -77,10 +64,10 @@ const { userData } = useUserInfoStore()
     grid-template-rows: repeat(auto-fit, 100px);
     grid-column-gap: var(--margin);
     grid-row-gap: var(--margin);
-    justify-content: center;
+    justify-content: space-between;
 
     .item {
-      justify-content: center;
+      // justify-content: center;
       align-items: flex-start;
       padding: var(--padding-sm);
       border-radius: 5px;
@@ -99,7 +86,7 @@ const { userData } = useUserInfoStore()
     }
 
     .item:hover {
-      box-shadow: 0 0px 10px rgba(0, 0, 0, 0.12);
+      box-shadow: var(--box-shadow);
     }
   }
 }
