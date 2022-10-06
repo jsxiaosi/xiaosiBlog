@@ -8,7 +8,7 @@ definePageMeta({
 const { marked } = useMarked()
 const { userData } = useUserInfoStore()
 
-const html = ref<string>(marked(userData.describeText))
+const html = ref<string>(marked(userData.describeText || ''))
 </script>
 
 <template>

@@ -90,6 +90,7 @@ const publishChange = async () => {
       messageInfo.text = '哎呀呀~！出错了'
       messageInfo.type = 'error'
     }
+    loading.value = false
   }
 }
 

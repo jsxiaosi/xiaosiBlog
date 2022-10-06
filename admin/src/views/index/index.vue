@@ -37,7 +37,7 @@
 
   const describe = ref<string>('');
 
-  const html = computed(() => marked(describe.value));
+  const html = computed(() => marked(describe.value || ''));
 
   const formOption = reactive<FormProps>({
     labelPosition: 'right',
