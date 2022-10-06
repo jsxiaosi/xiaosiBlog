@@ -1,11 +1,3 @@
-<template>
-  <div class="theme" :class="{ 'theme-dark': isDark === 'dark' }" @click="toggleDarkMode">
-    <div class="theme-inner"></div>
-    <SvgIcon name="sun"></SvgIcon>
-    <SvgIcon name="moon"></SvgIcon>
-  </div>
-</template>
-
 <script setup lang="ts">
   import { ref } from 'vue';
   import SvgIcon from '../SvgIcon/index.vue';
@@ -34,6 +26,14 @@
     });
   };
 </script>
+
+<template>
+  <div class="theme" :class="{ 'theme-dark': isDark === 'dark' }" @click="toggleDarkMode">
+    <div class="theme-inner"></div>
+    <SvgIcon name="sun"></SvgIcon>
+    <SvgIcon name="moon"></SvgIcon>
+  </div>
+</template>
 
 <style lang="scss" scoped>
   .theme {

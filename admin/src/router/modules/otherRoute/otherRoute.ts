@@ -71,16 +71,22 @@ const safeManagerRoutes: Array<AppRouteRecordRaw> = [
   {
     path: '/type',
     component: Layout,
-    redirect: '/type/typeList',
+    redirect: '/type/blog_type',
     name: 'type',
     alwaysShow: false,
     meta: { title: t('route.pathName.type'), icon: 'components' },
     children: [
       {
-        path: 'typeList',
-        name: 'RfTypeList',
-        component: () => import('@/views/type/typeTable/index.vue'),
-        meta: { title: t('route.pathName.typeList'), keepAlive: true },
+        path: 'blog_type',
+        name: 'RfBlogType',
+        component: () => import('@/views/type/blogTable/index.vue'),
+        meta: { title: t('route.pathName.blogType'), keepAlive: true },
+      },
+      {
+        path: 'project_type',
+        name: 'RfProjectType',
+        component: () => import('@/views/type/projectTable/index.vue'),
+        meta: { title: t('route.pathName.projectType'), keepAlive: true },
       },
     ],
   },

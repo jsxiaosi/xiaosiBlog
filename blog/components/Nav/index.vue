@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useUserInfoStore } from '@/store/userInfo'
+
 const color = useColorMode()
 const thmeIconClass = computed(() => {
   if (color.value === 'dark')
@@ -8,6 +10,8 @@ const thmeIconClass = computed(() => {
 function toggleDark() {
   color.value = color.value === 'dark' ? 'light' : 'dark'
 }
+
+const { userData } = useUserInfoStore()
 </script>
 
 <template>
@@ -20,10 +24,10 @@ function toggleDark() {
       <NuxtLink to="/blog">
         博客
       </NuxtLink>
-      <NuxtLink to="/">
+      <NuxtLink to="/project">
         项目
       </NuxtLink>
-      <NuxtLink to="https://github.com/jsxiaosi/" target="_blank">
+      <NuxtLink :to="userData.github" target="_blank">
         <i class="iconfont icon-github" />
       </NuxtLink>
       <div class="pointer" @click="toggleDark">

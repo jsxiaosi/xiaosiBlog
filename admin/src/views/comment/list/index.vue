@@ -1,43 +1,3 @@
-<template>
-  <div class="page-container">
-    <Table class="table" style="width: 100%" :attribute="attribute" :option="option">
-      <template #isSelected="slotData">
-        <el-switch
-          v-model="slotData.row.isSelected"
-          :active-value="1"
-          :inactive-value="0"
-          @change="(e: number) => switchChange(e, slotData.row)"
-        />
-      </template>
-      <template #state="slotData">
-        <span v-if="slotData.row.state === 1" style="color: #67c23a">已读</span>
-        <span v-else style="color: #f56c6c">未读</span>
-      </template>
-      <template #operate="slotData">
-        <div>
-          <el-button @click="seeChange(slotData.row)">查看</el-button>
-          <el-button @click="delAft(slotData.row)">删除</el-button>
-        </div>
-      </template>
-    </Table>
-    <el-pagination
-      class="pagination"
-      layout="prev, pager, next"
-      :page-count="total"
-      :current-page="count"
-      @current-change="currentChange"
-    />
-
-    <el-dialog
-      v-model="commentVisible"
-      :title="`来自：${commentInfo?.nickname} - ${commentInfo?.dateTime}的评论`"
-    >
-      <div>
-        {{ commentInfo?.content }}
-      </div>
-    </el-dialog>
-  </div>
-</template>
 <script setup lang="ts">
   import { onMounted, reactive, ref } from 'vue';
   import Table from '@/components/Table/index.vue';
@@ -96,9 +56,12 @@
     getCommentList();
   });
 
+  const total = ref<number>(0);
   const count = ref<number>(1);
+  const pageSize = ref<number>(10);
+
   const getCommentList = async () => {
-    const res = await commentListApi({ count: count.value, pageSize: 10 });
+    const res = await commentListApi({ count: count.value, pageSize: pageSize.value });
     attribute.data = res.list;
   };
 
@@ -112,8 +75,6 @@
       });
     }
   };
-
-  const total = ref<number>(0);
 
   const switchChange = (e: number, info: CommentModel) => {
     if (info.id) update({ ...info, isSelected: e });
@@ -143,4 +104,59 @@
     getCommentList();
   };
 </script>
-<style lang="scss"></style>
+<template>
+  <div class="page-container">
+    <Table class="table" style="width: 100%" :attribute="attribute" :option="option">
+      <template #isSelected="slotData">
+        <el-switch
+          v-model="slotData.row.isSelected"
+          :active-value="1"
+          :inactive-value="0"
+          @change="(e: number) => switchChange(e, slotData.row)"
+        />
+      </template>
+      <template #state="slotData">
+        <span v-if="slotData.row.state === 1" style="color: #67c23a">已读</span>
+        <span v-else style="color: #f56c6c">未读</span>
+      </template>
+      <template #operate="slotData">
+        <div>
+          <el-button @click="seeChange(slotData.row)">查看</el-button>
+          <el-button @click="delAft(slotData.row)">删除</el-button>
+        </div>
+      </template>
+    </Table>
+    <el-pagination
+      class="pagination"
+      layout="prev, pager, next"
+      :total="total"
+      :page-size="pageSize"
+      :current-page="count"
+      @current-change="currentChange"
+    />
+
+    <el-dialog
+      v-model="commentVisible"
+      :title="`来自：${commentInfo?.nickname} - ${commentInfo?.dateTime}的评论`"
+    >
+      <div>
+        {{ commentInfo?.content }}
+      </div>
+    </el-dialog>
+  </div>
+</template>
+<style lang="scss" scoped>
+  .page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .table {
+      flex: 1;
+      overflow-y: auto;
+      margin: 20px 0;
+    }
+    .pagination {
+      align-self: flex-end;
+    }
+  }
+</style>

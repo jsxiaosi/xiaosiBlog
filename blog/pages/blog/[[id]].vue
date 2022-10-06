@@ -51,6 +51,12 @@ getBlogList()
       <div class="container">
         <span class="title">文章分类：</span>
         <ul>
+          <li class="pointer">
+            <NuxtLink to="/blog">
+              <i class="iconfont icon-wenjianjia icon" />
+              <span>全部</span>
+            </NuxtLink>
+          </li>
           <li v-for="item in typeList" :key="item.id" class="pointer">
             <NuxtLink :to="`/blog/${item.id}`">
               <i class="iconfont icon-wenjianjia icon" />

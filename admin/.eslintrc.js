@@ -46,7 +46,7 @@ module.exports = {
     'vue/component-tags-order': [
       'error',
       {
-        order: ['template', 'script', 'style'],
+        order: ['script', 'template', 'style'],
       },
     ],
     // 是否要求组件名称始终为多字

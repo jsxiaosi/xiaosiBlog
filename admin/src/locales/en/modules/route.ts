@@ -9,6 +9,8 @@ const route = {
     commentList: 'Comments/Comments List',
     type: 'Type',
     typeList: 'Type List',
+    blogType: 'blog Type',
+    projectType: 'project Type',
   },
   log: {
     importError: 'The file has no default export',

@@ -1,52 +1,3 @@
-<template>
-  <div class="content">
-    <el-row :gutter="20">
-      <el-col :span="18" class="left">
-        <!-- <el-col :span="18"> -->
-        <el-card shadow="always" class="top_title">
-          <div class="title">
-            <el-input v-model="blogData.info.title" type="text" placeholder="博客标题"></el-input>
-            <el-select v-model="blogData.info.type_id" class="m-2" placeholder="选择博客分类">
-              <el-option
-                v-for="item in typeList"
-                :key="item.id"
-                :label="item.typeName"
-                :value="item.id"
-              ></el-option>
-            </el-select>
-          </div>
-        </el-card>
-        <el-card shadow="always" class="blog-card">
-          <div class="blog">
-            <el-input
-              v-model="blogData.info.article_content"
-              class="input"
-              type="textarea"
-            ></el-input>
-            <div class="marked" :innerHTML="html"></div>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="6" class="right">
-        <el-card shadow="always">
-          <div class="push">
-            <el-button @click="briefArticle()">暂存文章</el-button>
-            <el-button type="primary" @click="handleArticle()">发布文章</el-button>
-          </div>
-          <div class="introduction">
-            <img :src="fileData" />
-            <el-input
-              v-model="blogData.info.introduce"
-              class="input"
-              type="textarea"
-              placeholder="文章介绍"
-            ></el-input>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
-  </div>
-</template>
 <script lang="ts" setup>
   import { computed, onMounted, reactive, ref } from 'vue';
   import { typeListApi } from '@/api/typeInfo';
@@ -200,6 +151,55 @@
     });
   });
 </script>
+<template>
+  <div class="content">
+    <el-row :gutter="20">
+      <el-col :span="18" class="left">
+        <!-- <el-col :span="18"> -->
+        <el-card shadow="always" class="top_title">
+          <div class="title">
+            <el-input v-model="blogData.info.title" type="text" placeholder="博客标题"></el-input>
+            <el-select v-model="blogData.info.type_id" class="m-2" placeholder="选择博客分类">
+              <el-option
+                v-for="item in typeList"
+                :key="item.id"
+                :label="item.typeName"
+                :value="item.id"
+              ></el-option>
+            </el-select>
+          </div>
+        </el-card>
+        <el-card shadow="always" class="blog-card">
+          <div class="blog">
+            <el-input
+              v-model="blogData.info.article_content"
+              class="input"
+              type="textarea"
+            ></el-input>
+            <div class="marked" :innerHTML="html"></div>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="6" class="right">
+        <el-card shadow="always">
+          <div class="push">
+            <el-button @click="briefArticle()">暂存文章</el-button>
+            <el-button type="primary" @click="handleArticle()">发布文章</el-button>
+          </div>
+          <div class="introduction">
+            <img :src="fileData" />
+            <el-input
+              v-model="blogData.info.introduce"
+              class="input"
+              type="textarea"
+              placeholder="文章介绍"
+            ></el-input>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
+  </div>
+</template>
 
 <style lang="scss" scoped>
   .content {

@@ -1,25 +1,3 @@
-<template>
-  <div class="page-container">
-    <el-button @click="addDialog()">新建分类</el-button>
-    <Table :attribute="attribute" :option="option">
-      <template #operate="slotData">
-        <div>
-          <el-button @click="updateDialog(slotData.row)">修改</el-button>
-          <el-button @click="delType(slotData.row)">删除</el-button>
-        </div>
-      </template>
-    </Table>
-    <el-dialog v-model="dialogFormVisible" :title="typeInfo.id ? '修改分类名称' : '新增分类'">
-      <el-input v-model="typeInfo.typeName" autocomplete="off" />
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">Cancel</el-button>
-          <el-button type="primary" @click="updateType">Confirm</el-button>
-        </span>
-      </template>
-    </el-dialog>
-  </div>
-</template>
 <script lang="ts" setup>
   // import { BlogModel } from '@/api/blog/blogModel';
   import Table from '@/components/Table/index.vue';
@@ -107,4 +85,26 @@
     }
   };
 </script>
+<template>
+  <div class="page-container">
+    <el-button @click="addDialog()">新建分类</el-button>
+    <Table :attribute="attribute" :option="option">
+      <template #operate="slotData">
+        <div>
+          <el-button @click="updateDialog(slotData.row)">修改</el-button>
+          <el-button @click="delType(slotData.row)">删除</el-button>
+        </div>
+      </template>
+    </Table>
+    <el-dialog v-model="dialogFormVisible" :title="typeInfo.id ? '修改分类名称' : '新增分类'">
+      <el-input v-model="typeInfo.typeName" autocomplete="off" />
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">Cancel</el-button>
+          <el-button type="primary" @click="updateType">Confirm</el-button>
+        </span>
+      </template>
+    </el-dialog>
+  </div>
+</template>
 <style lang="scss" scoped></style>

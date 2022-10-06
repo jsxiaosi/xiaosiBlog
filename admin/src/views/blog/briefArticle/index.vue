@@ -1,15 +1,3 @@
-<template>
-  <div class="page-container">
-    <Table :attribute="attribute" :option="option">
-      <template #operate="slotData">
-        <div>
-          <el-button @click="updateAft(slotData.row.id)">修改</el-button>
-          <el-button @click="delAft(slotData.row)">删除</el-button>
-        </div>
-      </template>
-    </Table>
-  </div>
-</template>
 <script lang="ts" setup>
   import { briefArticleListApi, delbriefArticleApi } from '@/api/briefArticle';
   import { BriefArticleModel } from '@/api/briefArticle/briefArticleModel';
@@ -81,4 +69,16 @@
     router.push(`/blog/addArticle?id=${id}&type=brief`);
   };
 </script>
+<template>
+  <div class="page-container">
+    <Table :attribute="attribute" :option="option">
+      <template #operate="slotData">
+        <div>
+          <el-button @click="updateAft(slotData.row.id)">修改</el-button>
+          <el-button @click="delAft(slotData.row)">删除</el-button>
+        </div>
+      </template>
+    </Table>
+  </div>
+</template>
 <style lang="scss" scoped></style>

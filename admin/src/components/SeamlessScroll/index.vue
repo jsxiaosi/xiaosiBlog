@@ -1,29 +1,3 @@
-<template>
-  <div :ref="'wrap' + classOption['key']">
-    <div v-if="navigation" :style="leftSwitch" :class="leftSwitchClass" @click="leftSwitchClick">
-      <slot name="left-switch"></slot>
-    </div>
-    <div v-if="navigation" :style="rightSwitch" :class="rightSwitchClass" @click="rightSwitchClick">
-      <slot name="right-switch"></slot>
-    </div>
-    <div
-      :ref="'realBox' + classOption['key']"
-      :style="pos"
-      @mouseenter="enter"
-      @mouseleave="leave"
-      @touchstart="touchStart"
-      @touchmove="touchMove"
-      @touchend="touchEnd"
-      @mousewheel="wheel"
-    >
-      <div :ref="'slotList' + classOption['key']" :style="float">
-        <slot></slot>
-      </div>
-      <div :style="float" v-html="copyHtml"></div>
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
   // VueSeamlessScroll 插件本身不支持vue3写法，只能把源码拷贝下来自己手动转
   export default { name: 'SeamlessScroll' };
@@ -487,3 +461,29 @@
     reset,
   });
 </script>
+
+<template>
+  <div :ref="'wrap' + classOption['key']">
+    <div v-if="navigation" :style="leftSwitch" :class="leftSwitchClass" @click="leftSwitchClick">
+      <slot name="left-switch"></slot>
+    </div>
+    <div v-if="navigation" :style="rightSwitch" :class="rightSwitchClass" @click="rightSwitchClick">
+      <slot name="right-switch"></slot>
+    </div>
+    <div
+      :ref="'realBox' + classOption['key']"
+      :style="pos"
+      @mouseenter="enter"
+      @mouseleave="leave"
+      @touchstart="touchStart"
+      @touchmove="touchMove"
+      @touchend="touchEnd"
+      @mousewheel="wheel"
+    >
+      <div :ref="'slotList' + classOption['key']" :style="float">
+        <slot></slot>
+      </div>
+      <div :style="float" v-html="copyHtml"></div>
+    </div>
+  </div>
+</template>
