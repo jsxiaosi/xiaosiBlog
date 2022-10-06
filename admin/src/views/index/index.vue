@@ -171,6 +171,9 @@
   </div>
 </template>
 <style lang="scss">
+  .page-container {
+    height: auto;
+  }
   .avatar-uploader {
     margin-bottom: 20px;
   }

@@ -169,10 +169,4 @@
     />
   </div>
 </template>
-<style lang="scss" scoped>
-  .page-container {
-    .pagination {
-      align-self: flex-end;
-    }
-  }
-</style>
+<style lang="scss" scoped></style>

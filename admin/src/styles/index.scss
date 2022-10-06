@@ -81,6 +81,7 @@ div:focus {
   padding: 20px;
   display: flex;
   flex-direction: column;
+  height: 100%;
   .add {
     width: 100px;
     align-self: flex-end;
@@ -89,6 +90,9 @@ div:focus {
     flex: 1;
     overflow-y: auto;
     margin: 20px 0;
+  }
+  .pagination {
+    align-self: flex-end;
   }
 }
 
