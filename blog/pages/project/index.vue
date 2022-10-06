@@ -54,9 +54,10 @@ getBlogList()
 
 <style lang="scss">
 .project {
-  max-width: 624px;
+  max-width: 626px;
   height: 100%;
   margin: auto;
+  border: 1px solid transparent;
 
   .content {
     display: grid;

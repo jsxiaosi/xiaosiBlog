@@ -54,6 +54,11 @@ const contactList = [
       font-size: 38px;
       margin-bottom: var(--margin);
     }
+
+    span {
+      height: 40px;
+      word-break: break-all;
+    }
   }
 }
 </style>
