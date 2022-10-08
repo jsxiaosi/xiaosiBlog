@@ -1,3 +1,13 @@
+<script setup lang="ts">
+  import AppMain from './components/AppMain/index.vue';
+  import NavBart from './components/Navbart/index.vue';
+  import Sidebar from './components/Sidebar/index.vue';
+  import Breadcrumb from './components/Breadcrumb/index.vue';
+  import { getAppCollapseMenu } from '@/hooks/userAppWindow';
+
+  const { appConfigMode } = getAppCollapseMenu();
+</script>
+
 <template>
   <div class="app-wrapper">
     <!-- 顶部导航栏 -->
@@ -19,15 +29,5 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-  import AppMain from './components/AppMain/index.vue';
-  import NavBart from './components/Navbart/index.vue';
-  import Sidebar from './components/Sidebar/index.vue';
-  import Breadcrumb from './components/Breadcrumb/index.vue';
-  import { getAppCollapseMenu } from '@/hooks/userAppWindow';
-
-  const { appConfigMode } = getAppCollapseMenu();
-</script>
 
 <style lang="scss" scoped></style>

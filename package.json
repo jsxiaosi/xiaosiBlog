@@ -9,11 +9,12 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npm run dev:admin && npm run dev:service && npm run dev:blog",
+    "dev": "npm run dev:admin & npm run dev:service & npm run dev:blog",
     "dev:admin": "cd admin && npm run dev",
     "dev:service": "cd service && npm run dev",
     "dev:blog": "cd blog && npm run dev",
     "commit": "git-cz",
+    "log": "conventional-changelog -p cmyr-config -i CHANGELOG.md -s -r 0",
     "lint:admin": "cd admin && npm run lint:staged && npm run lint:pretty",
     "lint:blog": "cd blog && npm run lint",
     "lint:service": "cd service && npm run lint",
@@ -23,6 +24,7 @@
     "@commitlint/cli": "^16.2.1",
     "@commitlint/config-conventional": "^16.2.1",
     "commitizen": "^4.2.4",
+    "conventional-changelog-cli": "^2.2.2",
     "cz-conventional-changelog": "^3.3.0",
     "cz-customizable": "^6.3.0",
     "husky": "^8.0.0"

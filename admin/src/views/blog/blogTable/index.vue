@@ -56,6 +56,7 @@
       label: '操作',
       prop: 'operate',
       isSlots: true,
+      width: '160',
     },
   ];
 

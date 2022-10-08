@@ -1,42 +1,58 @@
 import { Controller } from 'egg';
 // const fs = require('fs');
 
+interface ArticleType {
+  id: number;
+  isSelected: number;
+  isRead: number;
+  blogId: number;
+  blogTitle: string;
+  content: string;
+  nickname: string;
+  contact: string;
+  dateTime: string;
+  isTop: number;
+}
+
 export default class ArticleController extends Controller {
+  private articleSqlString(condition?: string) {
+    return `SELECT article.id as id,
+    article.title as title,
+    article.introduce as introduce,
+    article.state as state,
+    ${condition ? condition + ',' : ''} 
+    FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime,
+    DATE_FORMAT(article.update_time,'%Y-%m-%d %H:%i:%s' ) as update_time,
+    article.view_count as view_count,
+    article.isTop as isTop,
+    type.typeName as typeName
+    FROM article LEFT JOIN type ON article.type_id = type.id `;
+  }
+
   // 客户端首页文章列表接口
   async blogArticleList() {
     const { ctx, app } = this;
-    console.log(ctx.query);
-    console.log(ctx.params);
     const { id } = ctx.query;
-    const sql = `SELECT article.id as id,
-                   article.title as title,
-                   article.introduce as introduce,
-                   FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime,
-                   DATE_FORMAT(article.update_time,'%Y-%m-%d %H:%i:%s' ) as update_time,
-                   article.view_count as view_count,
-                   type.typeName as typeName
-                   FROM article LEFT JOIN type ON article.type_id = type.id 
-                   WHERE article.isTop = 0 AND article.state != 0  AND article.type_id = ${
-  id !== '0' ? id : 'type.id'
-} 
-                   ORDER BY article.id DESC`;
+    const sql =
+      this.articleSqlString() +
+      `WHERE article.state != 0  AND article.type_id = ${
+        id !== '0' ? id : 'type.id'
+      } ORDER BY article.id DESC`;
 
-    const resList = await app.mysql.query(sql);
+    const sqlData: ArticleType[] = (await app.mysql.query(
+      sql,
+    )) as ArticleType[];
+
+    const resList: ArticleType[] = [];
+    const resTopList: ArticleType[] = [];
+
+    sqlData.forEach(item => {
+      if (item.isTop === 0) resList.push(item);
+      else resTopList.push(item);
+    });
+
     const resType = await app.mysql.select('type');
-    // 置顶文章
-    const sql2 = `SELECT article.id as id,
-                  article.title as title,
-                  article.introduce as introduce,
-                  FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime,
-                   DATE_FORMAT(article.update_time,'%Y-%m-%d %H:%i:%s' ) as update_time,
-                  article.view_count as view_count,
-                  type.typeName as typeName
-                  FROM article LEFT JOIN type ON article.type_id = type.id 
-                  WHERE article.isTop = 1 AND article.state != 0  AND article.type_id = ${
-  id !== '0' ? id : 'type.id'
-} 
-                  ORDER BY article.id DESC`;
-    const resTopList = await app.mysql.query(sql2);
+
     ctx.body = {
       list: resList,
       type: resType,
@@ -56,19 +72,11 @@ export default class ArticleController extends Controller {
       )) as EggMySQLUpdateResult;
       const updateSuccess = updateResult.affectedRows === 1;
       if (updateSuccess) {
-        const sql2 = `SELECT article.id as id,
-                      article.title as title,
-                      article.introduce as introduce,
-                      article.article_content as article_content,
-                      FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime,
-                       DATE_FORMAT(article.update_time,'%Y-%m-%d %H:%i:%s' ) as update_time,
-                      article.view_count as view_count,
-                      type.typeName as typeName
-                      FROM article LEFT JOIN type ON article.type_id = type.id WHERE article.id = ${id}`;
+        const sql2 =
+          this.articleSqlString('article.article_content as article_content') +
+          `WHERE article.id = ${id}`;
         const result = (await app.mysql.query(sql2)) as EggMySQLUpdateResult;
-        // const result = await app.mysql.select('article', {
-        //   where: { id },
-        // });
+
         const resType = await app.mysql.select('comment', {
           where: {
             blogId: id,
@@ -91,26 +99,15 @@ export default class ArticleController extends Controller {
     const { count, pageSize } = ctx.request.body;
     const firstIndex = (count - 1) * pageSize;
     const lastIndex = count * pageSize;
-    console.log(firstIndex, lastIndex);
     // 查询列表
-    const sql = `SELECT article.id as id,
-                 article.title as title,
-                 article.introduce as introduce,
-                 article.state as state,
-                 FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime,
-                 DATE_FORMAT(article.update_time,'%Y-%m-%d %H:%i:%s' ) as update_time,
-                 article.view_count as view_count,
-                 article.isTop as isTop,
-                 type.typeName as typeName
-                 FROM article LEFT JOIN type ON article.type_id = type.Id
-                 ORDER BY article.id DESC LIMIT ${firstIndex},${lastIndex}`;
+    const sql =
+      this.articleSqlString() +
+      `ORDER BY article.id DESC LIMIT ${firstIndex},${lastIndex}`;
     // 查询分页
     const sql2 = 'SELECT COUNT(*) as tooles FROM article';
 
     const resList = await app.mysql.query(sql);
     const total = await app.mysql.query(sql2);
-
-    console.log(total[0].tooles);
 
     ctx.body = { data: { list: resList, total: total[0].tooles }, code: 1 };
   }
@@ -122,7 +119,6 @@ export default class ArticleController extends Controller {
     const result = await app.mysql.select('article', {
       where: { id },
     });
-    console.log(result);
     ctx.body = { data: result[0], code: 1 };
   }
 
@@ -172,7 +168,6 @@ export default class ArticleController extends Controller {
   public async updateArticle() {
     const { ctx, app } = this;
     const tmpArticle = { ...ctx.request.body, update_time: ctx.formatTime() };
-    console.log(tmpArticle);
     ctx.updateOrderNum(app, tmpArticle);
     const result = await app.mysql.update('article', tmpArticle);
     ctx.body = ctx.handleData(result);

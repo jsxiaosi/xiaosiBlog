@@ -161,6 +161,12 @@ const blurChage = (e, input_type: string) => {
               <span>{{ item.text }}</span>
             </a>
           </li>
+          <li v-for="item in tocItems" :key="item.anchor" class="pointer">
+            <a :href="`#${item.anchor}`">
+              <i class="iconfont icon-wenjianjia icon" />
+              <span>{{ item.text }}</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

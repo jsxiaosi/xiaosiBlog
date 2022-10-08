@@ -212,14 +212,15 @@
     .input {
       width: 49%;
       height: 100%;
-      textarea {
-        height: 100%;
-        max-height: 100%;
-      }
+    }
+    .input:deep(.el-textarea__inner) {
+      height: 500px;
+      max-height: 100%;
     }
     .marked {
       width: 49%;
       height: 100%;
+      padding: 5px 11px;
       overflow-y: auto;
       border: 1px solid #{$text-color-placeholder};
     }

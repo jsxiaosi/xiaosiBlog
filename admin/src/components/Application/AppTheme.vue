@@ -4,12 +4,15 @@
   import { toggleTheme } from '@zougt/vite-plugin-theme-preprocessor/dist/browser-utils';
   import { useAppStore } from '@/store/modules/app';
   import { getAppCollapseMenu } from '@/hooks/userAppWindow';
+  import { useColorMode } from '@vueuse/core';
 
   // const toggleTheme = (scopeName = 'theme-default') => {
   // 	document.documentElement.className = scopeName
   // }
 
   const appStore = useAppStore();
+  const color = useColorMode();
+
   const { appConfigMode } = getAppCollapseMenu();
   const isDark = ref<string>(appConfigMode.value.themeMode);
   isDark.value = appConfigMode.value.themeMode;
@@ -19,6 +22,7 @@
 
   const toggleDarkMode = () => {
     isDark.value = isDark.value === 'day' ? 'dark' : 'day';
+    color.value = isDark.value === 'day' ? 'light' : 'dark';
     appConfigMode.value.themeMode = isDark.value;
     appStore.setAppConfigMode(appConfigMode.value);
     toggleTheme({
