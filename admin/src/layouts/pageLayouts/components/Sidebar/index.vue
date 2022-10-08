@@ -1,25 +1,3 @@
-<template>
-  <div>
-    <el-scrollbar wrap-class="scrollbar-wrapper">
-      <el-menu
-        :default-active="activeMenyu"
-        :unique-opened="true"
-        :collapse="appConfigMode.sidebarMode === 'horizontal' ? false : appConfigMode.collapseMenu"
-        :mode="mode"
-      >
-        <sidebar-item
-          v-for="route in routeModuleList"
-          :key="route.path"
-          :item="route"
-          :is-nest="false"
-          :base-path="route.path"
-        />
-      </el-menu>
-      <!-- <i class="breadcrumb-icon" :class="'el-icon-s-unfold'"></i> -->
-    </el-scrollbar>
-  </div>
-</template>
-
 <script setup lang="ts">
   import { computed } from 'vue';
   import { useRoute } from 'vue-router';
@@ -47,6 +25,28 @@
 
   // const isCollapse = ref(false)
 </script>
+
+<template>
+  <div>
+    <el-scrollbar wrap-class="scrollbar-wrapper">
+      <el-menu
+        :default-active="activeMenyu"
+        :unique-opened="true"
+        :collapse="appConfigMode.sidebarMode === 'horizontal' ? false : appConfigMode.collapseMenu"
+        :mode="mode"
+      >
+        <sidebar-item
+          v-for="route in routeModuleList"
+          :key="route.path"
+          :item="route"
+          :is-nest="false"
+          :base-path="route.path"
+        />
+      </el-menu>
+      <!-- <i class="breadcrumb-icon" :class="'el-icon-s-unfold'"></i> -->
+    </el-scrollbar>
+  </div>
+</template>
 
 <style lang="scss" scoped>
   .tac {

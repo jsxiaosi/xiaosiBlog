@@ -1,3 +1,9 @@
+<script setup lang="ts">
+  import { usePermissionStoreHook } from '@/store/modules/permission';
+  import { computed } from 'vue';
+  const getInclude = computed<string[]>(() => usePermissionStoreHook().cachePageList as string[]);
+</script>
+
 <template>
   <section class="app-main">
     <router-view>
@@ -11,12 +17,6 @@
     </router-view>
   </section>
 </template>
-
-<script setup lang="ts">
-  import { usePermissionStoreHook } from '@/store/modules/permission';
-  import { computed } from 'vue';
-  const getInclude = computed<string[]>(() => usePermissionStoreHook().cachePageList as string[]);
-</script>
 
 <style lang="scss">
   .app-main {

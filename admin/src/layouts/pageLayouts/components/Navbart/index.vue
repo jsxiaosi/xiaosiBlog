@@ -1,3 +1,29 @@
+<script setup lang="ts">
+  // import { ref } from 'vue'
+  import Sidebar from '../../components/Sidebar/index.vue';
+  import Setting from '../../components/Seting/index.vue';
+  import { AppLocale, AppTheme } from '@/components/Application';
+
+  import SvgIcon from '@/components/SvgIcon/index.vue';
+  import { ref } from 'vue';
+  import { getAppCollapseMenu } from '@/hooks/userAppWindow';
+
+  const drawer = ref(false);
+
+  const { appConfigMode } = getAppCollapseMenu();
+
+  // const options = ref([
+  // 	{ name: '123', value: 'variables-theme-day' },
+  // 	{ name: '456', value: 'variables-theme-dark' },
+  // ])
+
+  // const value = ref()
+
+  // const toggleTheme = (scopeName = 'theme-default') => {
+  // 	document.documentElement.className = scopeName
+  // }
+</script>
+
 <template>
   <div class="navbar">
     <div class="navbar-left">
@@ -32,32 +58,6 @@
 		</div>-->
   </div>
 </template>
-
-<script setup lang="ts">
-  // import { ref } from 'vue'
-  import Sidebar from '../../components/Sidebar/index.vue';
-  import Setting from '../../components/Seting/index.vue';
-  import { AppLocale, AppTheme } from '@/components/Application';
-
-  import SvgIcon from '@/components/SvgIcon/index.vue';
-  import { ref } from '@vue/reactivity';
-  import { getAppCollapseMenu } from '@/hooks/userAppWindow';
-
-  const drawer = ref(false);
-
-  const { appConfigMode } = getAppCollapseMenu();
-
-  // const options = ref([
-  // 	{ name: '123', value: 'variables-theme-day' },
-  // 	{ name: '456', value: 'variables-theme-dark' },
-  // ])
-
-  // const value = ref()
-
-  // const toggleTheme = (scopeName = 'theme-default') => {
-  // 	document.documentElement.className = scopeName
-  // }
-</script>
 
 <style lang="scss" scoped>
   .navbar {

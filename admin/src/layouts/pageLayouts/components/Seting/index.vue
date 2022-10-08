@@ -1,35 +1,3 @@
-<template>
-  <el-drawer v-model="drawer" title="设置" @close="emit('update:modelValue', false)">
-    <div class="drawer-content">
-      <div class="layout_seting">
-        <div class="sidebar_seting">
-          <el-tooltip content="左侧菜单模式" placement="bottom">
-            <div
-              class="sidebar_mode"
-              :class="{ 'sidebar_mode-select': appConfigMode.sidebarMode === 'vertical' }"
-              @click="handerShowElmenu('vertical')"
-            >
-              <div></div>
-              <div></div>
-            </div>
-          </el-tooltip>
-
-          <el-tooltip content="顶部菜单模式" placement="bottom">
-            <div
-              class="sidebar_mode"
-              :class="{ 'sidebar_mode-select': appConfigMode.sidebarMode === 'horizontal' }"
-              @click="handerShowElmenu('horizontal')"
-            >
-              <div></div>
-              <div></div>
-            </div>
-          </el-tooltip>
-        </div>
-      </div>
-    </div>
-  </el-drawer>
-</template>
-
 <script setup lang="ts">
   import { getAppCollapseMenu } from '@/hooks/userAppWindow';
   import { watch, ref } from 'vue';
@@ -63,6 +31,38 @@
     appStore.setAppConfigMode(isAppConfigMode.value);
   };
 </script>
+
+<template>
+  <el-drawer v-model="drawer" title="设置" @close="emit('update:modelValue', false)">
+    <div class="drawer-content">
+      <div class="layout_seting">
+        <div class="sidebar_seting">
+          <el-tooltip content="左侧菜单模式" placement="bottom">
+            <div
+              class="sidebar_mode"
+              :class="{ 'sidebar_mode-select': appConfigMode.sidebarMode === 'vertical' }"
+              @click="handerShowElmenu('vertical')"
+            >
+              <div></div>
+              <div></div>
+            </div>
+          </el-tooltip>
+
+          <el-tooltip content="顶部菜单模式" placement="bottom">
+            <div
+              class="sidebar_mode"
+              :class="{ 'sidebar_mode-select': appConfigMode.sidebarMode === 'horizontal' }"
+              @click="handerShowElmenu('horizontal')"
+            >
+              <div></div>
+              <div></div>
+            </div>
+          </el-tooltip>
+        </div>
+      </div>
+    </div>
+  </el-drawer>
+</template>
 
 <style lang="scss" scoped>
   .drawer-content {

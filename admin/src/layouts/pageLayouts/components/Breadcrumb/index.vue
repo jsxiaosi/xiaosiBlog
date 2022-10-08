@@ -1,32 +1,3 @@
-<template>
-  <div class="breadcrumb">
-    <!-- <i
-			class="breadcrumb-icon"
-			:class="[isCollapseMenu ? 'el-icon-s-unfold' : 'el-icon-s-fold']"
-			@click="handerShowElmenu"
-		></i>-->
-    <SvgIcon
-      class="breadcrumb-fold"
-      :class="{ 'breadcrumb-unfold': isAppConfigMode.collapseMenu }"
-      name="fold"
-      color="#e3e3e3"
-      @click="handerShowElmenu"
-    ></SvgIcon>
-    <el-breadcrumb class="app-breadcrumb" separator="/">
-      <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
-        <span
-          v-if="item.redirect === 'noRedirect' || index == levelList.length - 1"
-          class="no-redirect"
-          >{{ t(`${item.meta.title}`) }}</span
-        >
-        <a v-else class="redirect" @click.prevent="handleLink(item)">
-          {{ t(`${item.meta.title}`) }}
-        </a>
-      </el-breadcrumb-item>
-    </el-breadcrumb>
-  </div>
-</template>
-
 <script setup lang="ts">
   import SvgIcon from '@/components/SvgIcon/index.vue';
   import type { RouteLocationMatched } from 'vue-router';
@@ -83,6 +54,35 @@
     appStore.setAppConfigMode(isAppConfigMode.value);
   };
 </script>
+
+<template>
+  <div class="breadcrumb">
+    <!-- <i
+			class="breadcrumb-icon"
+			:class="[isCollapseMenu ? 'el-icon-s-unfold' : 'el-icon-s-fold']"
+			@click="handerShowElmenu"
+		></i>-->
+    <SvgIcon
+      class="breadcrumb-fold"
+      :class="{ 'breadcrumb-unfold': isAppConfigMode.collapseMenu }"
+      name="fold"
+      color="#e3e3e3"
+      @click="handerShowElmenu"
+    ></SvgIcon>
+    <el-breadcrumb class="app-breadcrumb" separator="/">
+      <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
+        <span
+          v-if="item.redirect === 'noRedirect' || index == levelList.length - 1"
+          class="no-redirect"
+          >{{ t(`${item.meta.title}`) }}</span
+        >
+        <a v-else class="redirect" @click.prevent="handleLink(item)">
+          {{ t(`${item.meta.title}`) }}
+        </a>
+      </el-breadcrumb-item>
+    </el-breadcrumb>
+  </div>
+</template>
 
 <style lang="scss" scoped>
   .breadcrumb {

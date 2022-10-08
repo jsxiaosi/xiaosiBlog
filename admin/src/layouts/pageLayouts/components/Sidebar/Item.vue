@@ -1,8 +1,3 @@
-<template>
-  <SvgIcon :class-name="className" :name="icon" />
-  <span v-if="title">{{ t(title) }}</span>
-</template>
-
 <script setup lang="ts">
   import SvgIcon from '@/components/SvgIcon/index.vue';
   import { useI18n } from '@/hooks/web/useI18n';
@@ -22,6 +17,11 @@
   });
   const { t } = useI18n();
 </script>
+
+<template>
+  <SvgIcon :class-name="className" :name="icon" />
+  <span v-if="title">{{ t(title) }}</span>
+</template>
 
 <style scoped>
   .sub-el-icon {
