@@ -22,7 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [14, 16, 18]
+        node-version: [16, 18]
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
@@ -35,10 +35,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install Dependencies
-        run: npm i
+        run: pnpm i
 
       - name: Continuous Integration
-        run: npm run ci
+        run: npm run dev
 
       - name: Code Coverage
         uses: codecov/codecov-action@v1
