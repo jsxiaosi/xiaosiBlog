@@ -18,7 +18,8 @@
     "lint:admin": "cd admin && npm run lint:staged && npm run lint:pretty",
     "lint:blog": "cd blog && npm run lint",
     "lint:service": "cd service && npm run lint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "preinstall": "npx only-allow pnpm"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.1",
@@ -27,7 +28,8 @@
     "conventional-changelog-cli": "^2.2.2",
     "cz-conventional-changelog": "^3.3.0",
     "cz-customizable": "^6.3.0",
-    "husky": "^8.0.0"
+    "husky": "^8.0.0",
+    "only-allow": "^1.1.1"
   },
   "author": "",
   "license": "MIT",
@@ -38,5 +40,8 @@
     "cz-customizable": {
       "config": ".cz-config.js"
     }
+  },
+  "engines": {
+    "node": ">= 16"
   }
 }

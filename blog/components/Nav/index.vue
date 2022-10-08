@@ -17,7 +17,7 @@ const { userData } = useUserInfoStore()
 <template>
   <div class="flex-x nav">
     <NuxtLink to="/">
-      <span class="blog_title">小斯的博客</span>
+      <span class="blog_title">{{ userData.name }}</span>
     </NuxtLink>
 
     <div class="rigth">
