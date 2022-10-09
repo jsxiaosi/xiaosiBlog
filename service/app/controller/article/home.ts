@@ -130,23 +130,24 @@ export default class ArticleController extends Controller {
       state: 1,
       addTime: new Date().getTime() / 1000,
     };
-
-    const sql =
-      'UPDATE type SET orderNum = (orderNum+1) WHERE id =' + tmpArticle.type_id;
-    const updateResult = (await app.mysql.query(sql)) as EggMySQLUpdateResult;
-    const updateSuccess = updateResult.affectedRows === 1;
-    if (updateSuccess) {
-      const result = (await app.mysql.insert(
-        'article',
-        tmpArticle,
-      )) as unknown as EggMySQLUpdateResult;
-      ctx.body = ctx.handleData(result);
-    } else {
-      ctx.body = {
-        errMsg: '添加失败，分类id不正确',
-        code: -1,
-      };
+    const result = (await app.mysql.insert(
+      'article',
+      tmpArticle,
+    )) as unknown as EggMySQLUpdateResult;
+    if (result.affectedRows === 1) {
+      const sql =
+        'UPDATE type SET orderNum = (orderNum+1) WHERE id =' +
+        tmpArticle.type_id;
+      const updateResult = (await app.mysql.query(sql)) as EggMySQLUpdateResult;
+      const updateSuccess = updateResult.affectedRows !== 1;
+      if (updateSuccess) {
+        ctx.body = {
+          errMsg: '添加失败，分类id不正确',
+          code: -1,
+        };
+      }
     }
+    ctx.body = ctx.handleData(result);
   }
 
   // 上传文件
