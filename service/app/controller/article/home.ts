@@ -127,6 +127,7 @@ export default class ArticleController extends Controller {
     const { ctx, app } = this;
     const tmpArticle = {
       ...ctx.request.body,
+      state: 1,
       addTime: new Date().getTime() / 1000,
     };
 
