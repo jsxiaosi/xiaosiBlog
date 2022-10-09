@@ -48,7 +48,7 @@
       isSlots: true,
     },
     {
-      label: '隐藏文章',
+      label: '显示文章',
       prop: 'state',
       isSlots: true,
     },

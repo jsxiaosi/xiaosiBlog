@@ -24,7 +24,7 @@
 
   const { createErrorMsg } = useMessage();
 
-  const { marked } = useMarked();
+  const { marked, htmlToText } = useMarked();
 
   onMounted(async () => {
     if (articleId) {
@@ -66,6 +66,7 @@
     } else if (!info.article_content) {
       createErrorMsg('文章内容不可为空');
     } else {
+      if (!info.introduce) info.introduce = htmlToText(html.value).slice(0, 300);
       let optType = 'add';
       if (pageType === 'brief') {
         if (info.article_id) {

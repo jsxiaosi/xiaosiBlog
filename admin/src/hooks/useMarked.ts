@@ -21,5 +21,13 @@ export const useMarked = () => {
     },
   });
 
-  return { marked };
+  const htmlToText = (htmlStr: string): string => {
+    const theConvertDiv = document.createElement('div');
+
+    theConvertDiv.innerHTML = htmlStr;
+
+    return (theConvertDiv.textContent || theConvertDiv.innerText || '').replace(/[ ]/g, '');
+  };
+
+  return { marked, htmlToText };
 };
