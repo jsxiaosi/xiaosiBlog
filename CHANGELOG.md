@@ -1,5 +1,17 @@
+## <small>2.0.1 (2022-10-09)</small>
+
+- perf: pref: 优化新增文章逻辑 ([a16d047](https://github.com/jsxiaosi/xiaosiBlog/commit/a16d047))
+- fixbug: 修复无法添加文章 ([f58d93b](https://github.com/jsxiaosi/xiaosiBlog/commit/f58d93b))
+- feature: feature: 自动添加文章描述 ([77c45d1](https://github.com/jsxiaosi/xiaosiBlog/commit/77c45d1))
+- feature: 工作流 ([8741b98](https://github.com/jsxiaosi/xiaosiBlog/commit/8741b98))
+- fix: - ([c7f1a86](https://github.com/jsxiaosi/xiaosiBlog/commit/c7f1a86))
+
 ## 2.0.0 (2022-10-08)
 
+- chore: - ([d9e4515](https://github.com/jsxiaosi/xiaosiBlog/commit/d9e4515))
+- chore: - ([3bb1bcc](https://github.com/jsxiaosi/xiaosiBlog/commit/3bb1bcc))
+- chore: log ([97f82db](https://github.com/jsxiaosi/xiaosiBlog/commit/97f82db))
+- chore: 强制依赖管理工具 ([66a7631](https://github.com/jsxiaosi/xiaosiBlog/commit/66a7631))
 - feature: 2.0.0 ([9731c51](https://github.com/jsxiaosi/xiaosiBlog/commit/9731c51))
 - feature: 添加数据库 ([d8f0ff0](https://github.com/jsxiaosi/xiaosiBlog/commit/d8f0ff0))
 - feature: 添加更多联系方式 ([425fd92](https://github.com/jsxiaosi/xiaosiBlog/commit/425fd92))
@@ -8,9 +20,6 @@
 - feature: 添加项目列表 ([dae881c](https://github.com/jsxiaosi/xiaosiBlog/commit/dae881c))
 - feature: 添加首页 ([8ebdabd](https://github.com/jsxiaosi/xiaosiBlog/commit/8ebdabd))
 - feature: 重构博客 UI ([db3caf5](https://github.com/jsxiaosi/xiaosiBlog/commit/db3caf5))
-- chore: - ([d9e4515](https://github.com/jsxiaosi/xiaosiBlog/commit/d9e4515))
-- chore: - ([3bb1bcc](https://github.com/jsxiaosi/xiaosiBlog/commit/3bb1bcc))
-- chore: 强制依赖管理工具 ([66a7631](https://github.com/jsxiaosi/xiaosiBlog/commit/66a7631))
 - style: 优化管理端代码格式 ([5ea43b2](https://github.com/jsxiaosi/xiaosiBlog/commit/5ea43b2))
 - fixbug: fixbug: fixbug: 修复样式问题 ([a581ce8](https://github.com/jsxiaosi/xiaosiBlog/commit/a581ce8))
 - fixbug: fixbug: 修复样式问题 ([fd703b2](https://github.com/jsxiaosi/xiaosiBlog/commit/fd703b2))
