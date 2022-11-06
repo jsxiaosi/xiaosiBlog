@@ -1,5 +1,3 @@
-## <small>2.0.1 (2022-11-06)</small>
-
 ## 2.1.0 (2022-11-06)
 
 - feature: add 评论邮箱提醒 ([fb77f95](https://github.com/jsxiaosi/xiaosiBlog/commit/fb77f95))
