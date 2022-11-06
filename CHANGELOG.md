@@ -1,5 +1,13 @@
+## <small>2.0.1 (2022-11-06)</small>
+
+## 2.1.0 (2022-11-06)
+
+- feature: add 评论邮箱提醒 ([fb77f95](https://github.com/jsxiaosi/xiaosiBlog/commit/fb77f95))
+- fixbug: 右击问题 ([f8e5c76](https://github.com/jsxiaosi/xiaosiBlog/commit/f8e5c76))
+
 ## <small>2.0.1 (2022-10-09)</small>
 
+- docs: v2.0.1 ([4dcef33](https://github.com/jsxiaosi/xiaosiBlog/commit/4dcef33))
 - perf: pref: 优化新增文章逻辑 ([a16d047](https://github.com/jsxiaosi/xiaosiBlog/commit/a16d047))
 - fixbug: 修复无法添加文章 ([f58d93b](https://github.com/jsxiaosi/xiaosiBlog/commit/f58d93b))
 - feature: feature: 自动添加文章描述 ([77c45d1](https://github.com/jsxiaosi/xiaosiBlog/commit/77c45d1))
