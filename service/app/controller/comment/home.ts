@@ -56,6 +56,7 @@ export default class CommentController extends Controller {
         'comment',
         tmpArticle,
       )) as unknown as EggMySQLUpdateResult;
+      await ctx.service.email.index(tmpArticle);
       ctx.body = ctx.handleData(result);
     } else {
       ctx.body = {

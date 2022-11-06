@@ -1,4 +1,5 @@
 const sd = require('silly-datetime');
+const nodemailer = require('nodemailer');
 
 export default {
   handleData(data: Record<string, any>) {
@@ -20,6 +21,17 @@ export default {
       };
     }
     return body;
+  },
+  sendEmail(app, mailOptions) {
+    const transporter = nodemailer.createTransport(app.config.emailConfig);
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (!error) {
+        console.log('邮件发送成功', info);
+        return;
+      }
+      console.log('邮件发送失败', error);
+      return;
+    });
   },
   // 修改分类条目数
   async updateOrderNum(app, article) {

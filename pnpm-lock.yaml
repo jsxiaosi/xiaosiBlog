@@ -214,6 +214,7 @@ importers:
       egg-scripts: ^2.6.0
       eslint: ^8.0.0
       eslint-config-egg: ^12.0.0
+      nodemailer: ^6.8.0
       silly-datetime: ^0.1.2
       tslib: ^1.9.0
       typescript: ^4.0.0
@@ -222,6 +223,7 @@ importers:
       egg-cors: 2.2.3
       egg-mysql: 3.1.1
       egg-scripts: 2.17.0
+      nodemailer: 6.8.0
     devDependencies:
       "@eggjs/tsconfig": 1.1.0
       "@types/mocha": 2.2.48
@@ -14656,6 +14658,14 @@ packages:
       {
         integrity: sha512-PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==,
       }
+
+  /nodemailer/6.8.0:
+    resolution:
+      {
+        integrity: sha512-EjYvSmHzekz6VNkNd12aUqAco+bOkRe3Of5jVhltqKhEsjw/y0PYPJfp83+s9Wzh1dspYAkUW/YNQ350NATbSQ==,
+      }
+    engines: { node: ">=6.0.0" }
+    dev: false
 
   /nopt/5.0.0:
     resolution:

@@ -1,4 +1,4 @@
-const Service = require('egg').Service;
+import { Service } from 'egg';
 const fs = require('fs');
 const path = require('path');
 const sendToWormhole = require('stream-wormhole');

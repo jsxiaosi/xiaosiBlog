@@ -10,6 +10,16 @@ export default (appInfo: EggAppInfo) => {
   // add your egg config in here
   config.middleware = [];
 
+  config.emailConfig = {
+    host: 'smtp.**.com', // QQ邮箱的SMTP地址
+    secureConnection: true, // 启动SSL
+    port: 465, // 邮箱的端口号一般都使用465，
+    auth: {
+      user: '**@qq.com', // 你自己的邮箱的邮箱地址
+      pass: '**********', // 授权码
+    },
+  };
+
   // add your special config in here
   const bizConfig = {
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
