@@ -4,10 +4,10 @@ useCanvasBg()
 
 <template>
   <div class="main">
-    <Nav />
     <div>
       <canvas id="myCanvas" class="canvas" />
     </div>
+    <Nav />
     <div class="main_content">
       <slot />
     </div>
@@ -42,6 +42,7 @@ useCanvasBg()
 
 <style lang="scss">
 .canvas {
+  pointer-events: none;
   position: fixed;
   top: 0;
   width: 100vw;
