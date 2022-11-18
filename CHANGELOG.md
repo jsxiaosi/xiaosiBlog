@@ -1,3 +1,9 @@
+## <small>2.1.1 (2022-11-18)</small>
+
+- fixbug: 修复重复的目录 ([0293493](https://github.com/jsxiaosi/xiaosiBlog/commit/0293493))
+- feature: log ([e0028c0](https://github.com/jsxiaosi/xiaosiBlog/commit/e0028c0))
+- feature: 版本 ([021cce4](https://github.com/jsxiaosi/xiaosiBlog/commit/021cce4))
+
 ## 2.1.0 (2022-11-06)
 
 - feature: add 评论邮箱提醒 ([fb77f95](https://github.com/jsxiaosi/xiaosiBlog/commit/fb77f95))
