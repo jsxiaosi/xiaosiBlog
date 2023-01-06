@@ -93,7 +93,7 @@ export class iAxios {
    * @description post请求（config：axios请求配置, options：数据的特殊处理）
    */
   post<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-    return this.request({ ...config, method: 'POST' }, options);
+    return this.request<T>({ ...config, method: 'POST' }, options);
   }
 
   /**
@@ -132,8 +132,8 @@ export class iAxios {
 
     return new Promise((resolve, reject) => {
       this.axiosInstance
-        .request<any, AxiosResponse<Result>>(conf)
-        .then((res: AxiosResponse<Result>) => {
+        .request<any, AxiosResponse<Result<T>>>(conf)
+        .then((res: AxiosResponse<Result<T>>) => {
           if (requestHook && isFunction(requestHook)) {
             try {
               resolve(requestHook(res, opt));

@@ -13,6 +13,7 @@ const route = {
     projectType: 'Project Type',
     project: 'Project',
     projectList: 'Project List',
+    config: 'System Function',
   },
   log: {
     importError: 'The file has no default export',

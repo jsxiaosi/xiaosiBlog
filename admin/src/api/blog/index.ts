@@ -5,6 +5,7 @@ import { BlogModel } from './blogModel';
 enum Api {
   GET_ARTICLE_LIST = '/article/list',
   GET_ARTICLE_INFO = '/article/info',
+  GET_ALL_BLOG_ID = '/blog/article_id',
   ADD_ARTICLE = '/article/add',
   UPDATE_ARTICLE = '/article/update',
   UPDATE_ARTICLE_IS_TOP = '/article/update_top',
@@ -15,6 +16,8 @@ enum Api {
 
 export const articleListApi = (data: { count: number; pageSize: number }) =>
   deffHttp.post<{ list: BlogModel[]; total: number }>({ url: Api.GET_ARTICLE_LIST, data });
+
+export const articleAllIdApi = () => deffHttp.get<{ id: string }[]>({ url: Api.GET_ALL_BLOG_ID });
 
 export const articleInfoApi = (data: { id: number }) =>
   deffHttp.get<BlogModel>({ url: Api.GET_ARTICLE_INFO, data });

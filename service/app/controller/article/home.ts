@@ -60,6 +60,14 @@ export default class ArticleController extends Controller {
     };
   }
 
+  public async getALLBlogID() {
+    const { ctx, app } = this;
+    const resList = await app.mysql.select('article', {
+      columns: [ 'id' ],
+    });
+    ctx.body = { data: resList.map((i: any) => i.id), code: 1 };
+  }
+
   // 客户端得到详细页文章接口
   public async blogGetArticleInfo() {
     const { ctx, app } = this;

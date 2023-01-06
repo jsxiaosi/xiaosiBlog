@@ -106,6 +106,22 @@ const safeManagerRoutes: Array<AppRouteRecordRaw> = [
       },
     ],
   },
+  {
+    path: '/config',
+    component: Layout,
+    redirect: '/config/index',
+    name: 'config',
+    alwaysShow: false,
+    meta: { title: t('route.pathName.config'), icon: 'components' },
+    children: [
+      {
+        path: 'index',
+        name: 'RfConfig',
+        component: () => import('@/views/config/index.vue'),
+        meta: { title: t('route.pathName.config'), keepAlive: true },
+      },
+    ],
+  },
 ];
 
 export default safeManagerRoutes;

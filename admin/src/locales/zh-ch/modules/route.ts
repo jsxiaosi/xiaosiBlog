@@ -12,6 +12,7 @@ const route = {
     projectType: '项目分类',
     project: '项目管理',
     projectList: '项目列表',
+    config: '系统功能',
   },
   log: {
     importError: '文件没有默认导出',

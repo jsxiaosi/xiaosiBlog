@@ -1,8 +1,11 @@
+## <small>2.2.1 (2023-01-06)</small>
+
 ## <small>2.1.1 (2022-11-18)</small>
 
-- fixbug: 修复重复的目录 ([0293493](https://github.com/jsxiaosi/xiaosiBlog/commit/0293493))
 - feature: log ([e0028c0](https://github.com/jsxiaosi/xiaosiBlog/commit/e0028c0))
+- feature: v2.1.1 ([402a0b0](https://github.com/jsxiaosi/xiaosiBlog/commit/402a0b0))
 - feature: 版本 ([021cce4](https://github.com/jsxiaosi/xiaosiBlog/commit/021cce4))
+- fixbug: 修复重复的目录 ([0293493](https://github.com/jsxiaosi/xiaosiBlog/commit/0293493))
 
 ## 2.1.0 (2022-11-06)
 

@@ -5,6 +5,7 @@ export default (app: Application) => {
   const adminauth = app.middleware.adminauth();
 
   router.get('/api/blog/article_list', controller.article.home.blogArticleList);
+  router.get('/api/blog/article_id', controller.article.home.getALLBlogID);
   router.get(
     '/api/blog/article_info',
     controller.article.home.blogGetArticleInfo,
