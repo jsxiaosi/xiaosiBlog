@@ -4,4 +4,12 @@ enum Api {
   BAIDU_SEO = '/config/baidu_seo',
 }
 
-export const baiduSEOApi = (data: string[]) => deffHttp.post<any>({ url: Api.BAIDU_SEO, data });
+export const baiduSEOApi = (data: string[]) =>
+  deffHttp.post<{
+    success: number;
+    remain: number;
+    not_same_site: string[];
+    not_valid: string[];
+    error: number;
+    message: string;
+  }>({ url: Api.BAIDU_SEO, data });

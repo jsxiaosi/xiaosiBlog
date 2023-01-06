@@ -2,6 +2,7 @@
   import { articleAllIdApi } from '@/api/blog';
   import { baiduSEOApi } from '@/api/config';
   import { typeListApi } from '@/api/typeInfo';
+  import { useMessage } from '@/hooks/web/useMessage';
   import { ElMessage } from 'element-plus';
   import { onMounted, ref } from 'vue';
 
@@ -10,6 +11,8 @@
     'https://www.jsxiaosi.com/blog',
     'https://www.jsxiaosi.com/project',
   ]);
+
+  const { createErrorMsg } = useMessage();
 
   onMounted(async () => {
     const typeList = await typeListApi();
@@ -33,6 +36,8 @@
         type: 'success',
         duration: 5000,
       });
+    } else {
+      createErrorMsg(`提交失败！状态码：${res.error}，错误信息：${res.message}`);
     }
   };
 </script>

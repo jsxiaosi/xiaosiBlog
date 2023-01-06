@@ -15,7 +15,7 @@ export default class ConfigController extends Controller {
         },
       },
     );
-    console.log(JSON.parse(datainfo.data));
+    console.log('123123123', JSON.parse(datainfo.data));
     ctx.body = { data: JSON.parse(datainfo.data), code: 1 };
   }
 }
