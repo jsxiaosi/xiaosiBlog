@@ -1,5 +1,7 @@
 ## <small>2.2.1 (2023-01-06)</small>
 
+- feature: 百度 seo 链接自动提交 ([afcb682](https://github.com/jsxiaosi/xiaosiBlog/commit/afcb682))
+
 ## <small>2.1.1 (2022-11-18)</small>
 
 - feature: log ([e0028c0](https://github.com/jsxiaosi/xiaosiBlog/commit/e0028c0))
