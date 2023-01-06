@@ -1,5 +1,7 @@
 ## <small>2.2.1 (2023-01-06)</small>
 
+- fixbug: 错误信息 ([3d117e2](https://github.com/jsxiaosi/xiaosiBlog/commit/3d117e2))
+- feature: log ([9308122](https://github.com/jsxiaosi/xiaosiBlog/commit/9308122))
 - feature: 百度 seo 链接自动提交 ([afcb682](https://github.com/jsxiaosi/xiaosiBlog/commit/afcb682))
 
 ## <small>2.1.1 (2022-11-18)</small>
