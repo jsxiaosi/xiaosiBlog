@@ -7,9 +7,7 @@
   import { onMounted, ref } from 'vue';
 
   const linkList = ref<string[]>([
-    'https://www.jsxiaosi.com/',
-    'https://www.jsxiaosi.com/blog',
-    'https://www.jsxiaosi.com/project',
+    'https://www.you_url.com/',
   ]);
 
   const { createErrorMsg } = useMessage();
@@ -17,13 +15,13 @@
   onMounted(async () => {
     const typeList = await typeListApi();
     if (typeList) {
-      const typeLink = typeList.map((i) => `https://www.jsxiaosi.com/blog/${i.id}`);
+      const typeLink = typeList.map((i) => `https://www.you_url.com/blog/${i.id}`);
       linkList.value.push(...typeLink);
     }
 
     const idlist = await articleAllIdApi();
     if (idlist) {
-      const idToLink = idlist.map((i) => `https://www.jsxiaosi.com/article_info/${i}`);
+      const idToLink = idlist.map((i) => `https://www.you_url.com/article_info/${i}`);
       linkList.value.push(...idToLink);
     }
   });
