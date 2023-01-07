@@ -6,6 +6,7 @@
   import { ElMessage } from 'element-plus';
   import { onMounted, ref } from 'vue';
 
+  // 这里使用自己的域名
   const linkList = ref<string[]>([
     'https://www.you_url.com/',
   ]);
